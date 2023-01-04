@@ -7,7 +7,7 @@ public class GameStatus {
 
     // DTO
 
-    String id;
+    String gameId;
     String name;
     Move move;
     String opponentName;

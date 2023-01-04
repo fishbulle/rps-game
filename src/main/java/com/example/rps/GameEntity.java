@@ -17,7 +17,7 @@ import java.util.UUID;
 public class GameEntity {
 
     @Id
-    private String id = UUID.randomUUID().toString();
+    private String gameId = UUID.randomUUID().toString();
     Status status;
     Result result;
 
