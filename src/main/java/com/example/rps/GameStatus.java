@@ -13,5 +13,6 @@ public class GameStatus {
     String opponentName;
     Move opponentMove;
     Status status;
+    Result result;
 
 }

@@ -19,5 +19,6 @@ public class GameEntity {
     @Id
     private String id = UUID.randomUUID().toString();
     Status status;
+    Result result;
 
 }
