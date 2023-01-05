@@ -25,4 +25,5 @@ public class GameEntity {
     Status status;
     Result result;
 
+
 }
