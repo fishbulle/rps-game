@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity(name = "players")
 @Getter
 @Setter
@@ -17,16 +19,16 @@ import lombok.Setter;
 public class PlayerEntity {
 
     @Id
-    private String id;  // deklarera UUID.randomUUID redan här eller i serviceklass?
+    private UUID playerId;  // deklarera UUID.randomUUID redan här eller i serviceklass?
     private String name;
     private String opponentName;
 
-    public PlayerEntity(String id) {
-        this.id = id;
+    public PlayerEntity(UUID playerId) {
+        this.playerId = playerId;
     }
 
-    public PlayerEntity(String id, String name) {
-        this.id = id;
+    public PlayerEntity(UUID playerId, String name) {
+        this.playerId = playerId;
         this.name = name;
     }
 }

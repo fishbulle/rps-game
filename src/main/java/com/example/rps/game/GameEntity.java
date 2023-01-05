@@ -24,6 +24,6 @@ public class GameEntity {
     private String gameId = UUID.randomUUID().toString();
     Status status;
 
-    public GameEntity(String toString, Status status, String playerId, String playerName) {
-    }
+  /*  public GameEntity(String toString, Status status, String playerId, String playerName) {
+    }*/
 }

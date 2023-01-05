@@ -2,9 +2,11 @@ package com.example.rps.player;
 
 import lombok.Value;
 
+import java.util.UUID;
+
 @Value
 public class PlayerDTO {
 
-    String id;
+    UUID id;
     String name;
 }
