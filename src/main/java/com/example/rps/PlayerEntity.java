@@ -13,7 +13,6 @@ import java.util.UUID;
 @Entity(name = "players")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "players")
 public class PlayerEntity {
@@ -21,8 +20,14 @@ public class PlayerEntity {
     @Id
     private String id;  // deklarera UUID.randomUUID redan här eller i serviceklass?
     private String name;
-    Move move;
     private String opponentName;
-    Move opponentMove;
 
+    public PlayerEntity(String id) {
+        this.id = id;
+    }
+
+    public PlayerEntity(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
