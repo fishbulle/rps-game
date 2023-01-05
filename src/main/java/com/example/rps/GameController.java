@@ -1,5 +1,9 @@
 package com.example.rps;
 
+import com.example.rps.game.GameEntity;
+import com.example.rps.game.GameStatus;
+import com.example.rps.game.Move;
+import com.example.rps.game.Status;
 import com.example.rps.player.PlayerDTO;
 import com.example.rps.player.PlayerEntity;
 import lombok.AllArgsConstructor;
@@ -20,6 +24,17 @@ public class GameController {
     @PostMapping("user/name")
     public PlayerEntity setName(@RequestBody PlayerDTO playerDTO) {
         return gameService.setName(
+                playerDTO.getName()
+        );
+    }
+
+    @PostMapping("start")
+    public GameEntity startGame(@RequestBody GameStatus gameStatus,
+                                @RequestBody PlayerDTO playerDTO) {
+        return gameService.startGame(
+                gameStatus.getGameId(),
+                gameStatus.getStatus(),
+                playerDTO.getId(),
                 playerDTO.getName()
         );
     }

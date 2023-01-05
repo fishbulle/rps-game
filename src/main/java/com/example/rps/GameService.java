@@ -1,6 +1,8 @@
 package com.example.rps;
 
+import com.example.rps.game.GameEntity;
 import com.example.rps.game.GameRepository;
+import com.example.rps.game.Status;
 import com.example.rps.player.PlayerEntity;
 import com.example.rps.player.PlayerRepository;
 import lombok.AllArgsConstructor;
@@ -30,5 +32,15 @@ public class GameService {
                 name
         );
         return playerRepository.save(playerEntity);
+    }
+
+    public GameEntity startGame(String gameId, Status status, String playerId, String playerName ) {
+        GameEntity gameEntity = new GameEntity(
+                UUID.randomUUID().toString(),
+                status,
+                playerId,
+                playerName
+        );
+        return gameRepository.save(gameEntity);
     }
 }

@@ -12,6 +12,6 @@ public class GameStatus {
     Move move;
     String opponentName;
     Move opponentMove;
-    Status game;
+    Status status;
 
 }
