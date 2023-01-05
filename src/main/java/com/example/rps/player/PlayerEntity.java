@@ -19,7 +19,7 @@ import java.util.UUID;
 public class PlayerEntity {
 
     @Id
-    private UUID playerId;  // deklarera UUID.randomUUID redan här eller i serviceklass?
+    private UUID playerId;
     private String name;
     private String opponentName;
 

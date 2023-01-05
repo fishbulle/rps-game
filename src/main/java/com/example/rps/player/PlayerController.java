@@ -18,11 +18,8 @@ public class PlayerController {
     }
 
 /*    @PostMapping("/user/name")
-    public void setName(@RequestBody PlayerDTO playerDTO,
-                        @RequestHeader(value = "token") UUID playerId) {
-        PlayerEntity playerEntity = new PlayerEntity(
-                playerId,
-                playerDTO.getName()
-        );
+    public void setName(@RequestBody UpdatePlayer updatePlayer, UUID playerId) {
+        playerService.setName(updatePlayer, playerId);
     }*/
+
 }

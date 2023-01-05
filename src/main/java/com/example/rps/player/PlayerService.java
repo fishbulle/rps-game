@@ -20,11 +20,11 @@ public class PlayerService {
         return playerEntity;
     }
 
-/*    public void setName(PlayerDTO playerDTO, UUID playerId) {
-        Optional<PlayerEntity> playerEntity = playerRepository.findBy(playerId);
+/*    public void setName(UpdatePlayer updatePlayer, UUID playerId) {
+        Optional<PlayerEntity> playerEntity = playerRepository.findById(playerId);
 
         if (playerEntity.isPresent()) {
-            playerEntity.get().setName(playerDTO.getName());
+            playerEntity.get().setName(updatePlayer.getName());
 
             playerRepository.save(playerEntity.get());
         }

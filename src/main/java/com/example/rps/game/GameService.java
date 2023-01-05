@@ -15,20 +15,15 @@ import java.util.UUID;
 public class GameService {
 
     GameRepository gameRepository;
-    PlayerRepository playerRepository;
 
-/*    public GameEntity startGame(String gameId,
-                                Status status,
-                                String name,
-                                String opponentName) {
+    public GameEntity startGame(String gameId,
+                                Status status) {
         GameEntity gameEntity = new GameEntity(
                 UUID.randomUUID().toString(),
-                status,
-                name,
-                opponentName
+                status
         );
 
         return gameRepository.save(gameEntity);
-    }*/
+    }
 
 }
