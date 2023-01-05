@@ -3,7 +3,10 @@ package com.example.rps.game;
 public enum Status {
     NONE,
     OPEN,
-    ACTIVE
+    ACTIVE,
+    WIN,
+    LOSE,
+    DRAW
 
     // använda enum i switch statement tex case NONE -> System.out.println("Inget aktivt spel hittades.") i service ??
 

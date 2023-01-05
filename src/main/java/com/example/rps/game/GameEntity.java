@@ -22,8 +22,6 @@ public class GameEntity {
     @Id
     @Column(name = "game_id")
     private String gameId = UUID.randomUUID().toString();
-    Status status;
-    Result result;
-
+    Status game;
 
 }

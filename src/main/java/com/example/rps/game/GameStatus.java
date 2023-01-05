@@ -3,7 +3,7 @@ package com.example.rps.game;
 import lombok.*;
 
 @Value
-public class GameDTO {
+public class GameStatus {
 
     // DTO
 
@@ -12,7 +12,6 @@ public class GameDTO {
     Move move;
     String opponentName;
     Move opponentMove;
-    Status status;
-    Result result;
+    Status game;
 
 }
