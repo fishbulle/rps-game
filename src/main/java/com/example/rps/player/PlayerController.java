@@ -17,9 +17,10 @@ public class PlayerController {
                 .getPlayerId();
     }
 
-/*    @PostMapping("/user/name")
-    public void setName(@RequestBody UpdatePlayer updatePlayer, UUID playerId) {
-        playerService.setName(updatePlayer, playerId);
-    }*/
+    @PostMapping("/user/name")
+    public void setPlayerName(@RequestBody UpdatePlayer updatePlayer,
+                              @RequestHeader(value = "token") UUID playerId) {
+        playerService.setPlayerName(updatePlayer, playerId);
+    }
 
 }
