@@ -1,4 +1,4 @@
-package com.example.rps;
+package com.example.rps.game;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

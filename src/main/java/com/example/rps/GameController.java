@@ -1,5 +1,7 @@
 package com.example.rps;
 
+import com.example.rps.player.PlayerDTO;
+import com.example.rps.player.PlayerEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

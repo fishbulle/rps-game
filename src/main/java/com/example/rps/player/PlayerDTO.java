@@ -1,4 +1,4 @@
-package com.example.rps;
+package com.example.rps.player;
 
 import lombok.Value;
 

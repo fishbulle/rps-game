@@ -1,4 +1,4 @@
-package com.example.rps;
+package com.example.rps.game;
 
 public enum Result {
     WIN,
