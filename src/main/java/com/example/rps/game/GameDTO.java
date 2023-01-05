@@ -3,7 +3,7 @@ package com.example.rps.game;
 import lombok.*;
 
 @Value
-public class GameStatus {
+public class GameDTO {
 
     // DTO
 

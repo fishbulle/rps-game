@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "players")
+@Table(name = "Players")
 public class PlayerEntity {
 
     @Id
