@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.context.annotation.Bean;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public class PlayerEntity {
     private String name;
     private String opponentName;
 
-    public PlayerEntity(UUID playerId) {
+    public PlayerEntity(UUID playerId) {        //Constructor with only id, for use in setting id at start
         this.playerId = playerId;
     }
 
