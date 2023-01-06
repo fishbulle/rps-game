@@ -11,11 +11,12 @@ public class GameService {
 
     GameRepository gameRepository;
 
-    public GameEntity startGame(String gameId,
-                                Status status) {
+    public GameEntity startGame(Status status,
+                                String name) {
         GameEntity gameEntity = new GameEntity(
                 UUID.randomUUID().toString(),
-                status
+                status,
+                name
         );
 
         return gameRepository.save(gameEntity);

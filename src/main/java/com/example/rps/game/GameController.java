@@ -9,12 +9,13 @@ public class GameController {
 
     GameService gameService;
 
-    @PostMapping("start")
+    @PostMapping("/start")
     public GameEntity startGame(@RequestBody GameStatus gameStatus) {
         return gameService.startGame(
-                gameStatus.getGameId(),
-                gameStatus.getStatus()
+                gameStatus.getStatus(),
+                gameStatus.getName()
         );
     }
+
 
 }
