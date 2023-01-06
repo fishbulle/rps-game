@@ -1,8 +1,6 @@
 package com.example.rps.player;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +21,7 @@ public class PlayerEntity {
     private String name;
     private String opponentName;
 
+    /*
     public PlayerEntity(UUID playerId) {        //Constructor with only id, for use in setting id at start
         this.playerId = playerId;
     }
@@ -30,5 +29,5 @@ public class PlayerEntity {
     public PlayerEntity(UUID playerId, String name) {
         this.playerId = playerId;
         this.name = name;
-    }
+    } */
 }

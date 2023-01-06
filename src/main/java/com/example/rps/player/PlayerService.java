@@ -1,20 +1,24 @@
 package com.example.rps.player;
 
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class PlayerService {
 
-    PlayerRepository playerRepository;
+    private final PlayerRepository playerRepository;
+
+    public PlayerService(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+    }
 
     public PlayerEntity getToken() {                    // create new PlayerEntity. Calls constructor with only UUID in PlayerEntity
         PlayerEntity playerEntity = new PlayerEntity(   // create a new player entity object with token (UUID)
-                UUID.randomUUID()
+                UUID.randomUUID(),
+                null,
+                null
         );
         playerRepository.save(playerEntity);            // save entity via repository
         return playerEntity;

@@ -8,4 +8,6 @@ public class UpdatePlayer {
     // DTO - vi vill bara kunna uppdatera namnet, inte ID
 
     String name;
+    String opponentName;
+
 }
