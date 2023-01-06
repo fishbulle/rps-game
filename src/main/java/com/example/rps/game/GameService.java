@@ -1,5 +1,6 @@
 package com.example.rps.game;
 
+import com.example.rps.player.PlayerEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,30 +13,32 @@ public class GameService {
 
     GameRepository gameRepository;
 
+/*
     public GameEntity startGame(GameStatus gameStatus) {
         GameEntity gameEntity = new GameEntity(
                 UUID.randomUUID(),
-                gameStatus.getStatus(),
-                gameStatus.getName(),
-                gameStatus.getOpponentName()
+                null,
+                null,
+                null,
+                null,
+                Status.OPEN
         );
 
         return gameRepository.save(gameEntity);
     }
 
-    public GameEntity joinGame(GameStatus gameStatus) {
+    public Optional<GameEntity> joinGame(UUID gameId, GameStatus gameStatus) {
 
-        Optional<GameEntity> gameEntity = gameRepository.findById(gameStatus.getGameId());
-
-        if (gameEntity.isPresent()) {
-            gameEntity.get().setStatus(gameStatus.getStatus()),
-            gameEntity.get().setName(gameStatus.getName()),
-            gameEntity.get().setOpponentName(gameStatus.getOpponentName());
-        }
-
-       return gameRepository.save(gameEntity.get());
+        return gameRepository.findById(gameId)
+                .map(gameEntity -> {
+                    if (gameStatus.getOpponentName() == null)
+                        gameEntity.setPlayerTwo(gameStatus.getOpponentName());
+                    gameRepository.save(gameEntity);
+                    return gameEntity;
+                });
 
     }
+*/
 
 
 }
