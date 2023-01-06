@@ -19,8 +19,8 @@ public class PlayerController {
 
     @PostMapping("/user/name")
     public void setPlayerName(@RequestBody UpdatePlayer updatePlayer,
-                              @RequestHeader(value = "token") UUID playerId) {  //playerService.setPlayerName returns void.
-        playerService.setPlayerName(updatePlayer, playerId);                    //Send UUID playerId and UpdatePlayer, which contains only String name
+                              @RequestHeader(value = "token") UUID playerId) {  // playerService.setPlayerName returns void.
+        playerService.setPlayerName(updatePlayer, playerId);                    // Send UUID playerId and UpdatePlayer, which contains only String name
     }
 
 }
