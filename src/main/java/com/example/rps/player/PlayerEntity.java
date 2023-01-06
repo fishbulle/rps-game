@@ -11,11 +11,11 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity(name = "players")
+@Table(name = "Players")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Players")
 public class PlayerEntity {
 
     @Id
