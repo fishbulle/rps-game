@@ -11,11 +11,13 @@ public class GameController {
 
     @PostMapping("/start")
     public GameEntity startGame(@RequestBody GameStatus gameStatus) {
-        return gameService.startGame(
-                gameStatus.getStatus(),
-                gameStatus.getName()
-        );
+        return gameService.startGame(gameStatus);
     }
 
+    @GetMapping("/games/join/{gameId}")
+    public GameEntity joinGame(@PathVariable("gameId")
+                               @RequestBody GameStatus gameStatus) {
+        return gameService.joinGame(gameStatus);
+    }
 
 }

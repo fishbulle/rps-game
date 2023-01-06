@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity(name = "game")
 @Table(name = "Game")
 @Getter
@@ -19,8 +21,9 @@ public class GameEntity {
 
     @Id
     @Column(name = "game_id")
-    private String gameId;
+    private UUID gameId;
     Status status;
     String name;
+    String opponentName;
 
 }
