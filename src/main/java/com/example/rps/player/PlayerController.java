@@ -14,7 +14,7 @@ public class PlayerController {
     }
 
     @GetMapping("/auth/token")
-    public UUID getToken() {            //playerService.getToken returns PlayerEntity. Here we get id from the entity, and return it.
+    public UUID getToken() {            // playerService.getToken returns PlayerEntity. Here we get id from the entity, and return it.
         return playerService.getToken()
                 .getPlayerId();
     }

@@ -21,13 +21,4 @@ public class PlayerEntity {
     private String name;
     private String opponentName;
 
-    /*
-    public PlayerEntity(UUID playerId) {        //Constructor with only id, for use in setting id at start
-        this.playerId = playerId;
-    }
-
-    public PlayerEntity(UUID playerId, String name) {
-        this.playerId = playerId;
-        this.name = name;
-    } */
 }

@@ -14,7 +14,7 @@ public class PlayerService {
         this.playerRepository = playerRepository;
     }
 
-    public PlayerEntity getToken() {                    // create new PlayerEntity. Calls constructor with only UUID in PlayerEntity
+    public PlayerEntity getToken() {
         PlayerEntity playerEntity = new PlayerEntity(   // create a new player entity object with token (UUID)
                 UUID.randomUUID(),
                 null,
