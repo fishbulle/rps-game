@@ -18,8 +18,16 @@ public class GameService {
     PlayerRepository playerRepository;
 
 
-    public GameEntity startGame(UUID playerID, PlayerEntity playerEntity) {
 
+    public GameStatus startGame(UUID playerID, PlayerEntity playerEntity) {
+        UUID uuid = UUID.randomUUID();
+        GameStatus gameStatus = new GameStatus(
+                uuid,
+                playerRepository.findById(playerID).get(),
+                null,
+                null,
+                null,
+                OPEN);
 //        GameEntity gameEntity = new GameEntity(UUID.randomUUID());
 //        gameEntity.setGameStatus(gameStatus.getStatus());
 //        gameEntity.setPlayerOne(gameStatus.getName());
@@ -30,8 +38,9 @@ public class GameService {
         gameEntity.setPlayerOne(playerEntity.getPlayerOne().getPlayerOne());
         gameEntity.setPlayerOne(playerRepository.findById(playerID).get());
 
+        gameRepository.save(gameEntity);        //returnerades tidigare
 
-        return gameRepository.save(gameEntity);
+        return gameStatus;
     }
 /*
     public Optional<GameEntity> joinGame(UUID gameId, GameStatus gameStatus) {

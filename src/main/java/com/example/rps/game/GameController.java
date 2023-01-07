@@ -18,7 +18,7 @@ public class GameController {
 
 
     @PostMapping("/start")
-    public GameEntity startGame(@RequestHeader(value = "token") UUID playerId) {
+    public GameStatus startGame(@RequestHeader(value = "token") UUID playerId) {
         PlayerEntity playerEntity = new PlayerEntity(
                 playerId,
                 playerRepository.findById(playerId).toString(),
