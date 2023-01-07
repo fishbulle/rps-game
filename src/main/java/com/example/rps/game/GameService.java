@@ -13,20 +13,14 @@ public class GameService {
 
     GameRepository gameRepository;
 
-/*
     public GameEntity startGame(GameStatus gameStatus) {
-        GameEntity gameEntity = new GameEntity(
-                UUID.randomUUID(),
-                null,
-                null,
-                null,
-                null,
-                Status.OPEN
-        );
+        GameEntity gameEntity = new GameEntity(UUID.randomUUID());
+        gameEntity.setGameStatus(gameStatus.getStatus());
+        gameEntity.setPlayerOne(gameStatus.getName());
 
         return gameRepository.save(gameEntity);
     }
-
+/*
     public Optional<GameEntity> joinGame(UUID gameId, GameStatus gameStatus) {
 
         return gameRepository.findById(gameId)

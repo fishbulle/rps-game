@@ -12,12 +12,12 @@ public class GameController {
 
     GameService gameService;
 
-/*    @PostMapping("/start")
+    @PostMapping("/start")
     public GameEntity startGame(@RequestBody GameStatus gameStatus) {
         return gameService.startGame(gameStatus);
     }
 
-    @GetMapping("/games/join/{gameId}")
+/*    @GetMapping("/games/join/{gameId}")
     public Optional<GameEntity> joinGame(@PathVariable("gameId") UUID gameId,
                              @RequestBody GameStatus gameStatus) {
         return gameService.joinGame(gameId, gameStatus);

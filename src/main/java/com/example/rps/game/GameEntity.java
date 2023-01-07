@@ -26,8 +26,8 @@ public class GameEntity {
     PlayerEntity playerOne;
 
     @Column(name = "player_move")
-    @Enumerated(EnumType.STRING)
-    Move playerMove;
+    @Enumerated(EnumType.STRING)  // enumerated gör så att det står med bokstäver istället för siffror
+    Move playerMove;              // tex istället för 1 står det ROCK
 
     @OneToOne
     @JoinColumn(name = "playerTwo")
@@ -40,5 +40,9 @@ public class GameEntity {
     @Column(name = "game_status")
     @Enumerated(EnumType.STRING)
     Status gameStatus;
+
+    public GameEntity(UUID gameId) {
+        this.gameId = gameId;
+    }
 
 }

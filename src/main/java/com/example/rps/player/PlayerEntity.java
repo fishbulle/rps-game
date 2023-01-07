@@ -25,7 +25,7 @@ public class PlayerEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "playerOne")
+    @OneToOne(mappedBy = "playerOne")  // mappar ihop GameEntity med PlayerEntity playerOne
     @JsonIgnoreProperties("playerOne")
     private GameEntity playerOne;
 
