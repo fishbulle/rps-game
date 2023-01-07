@@ -36,4 +36,10 @@ public class PlayerEntity {
     public PlayerEntity(UUID playerId) {
         this.playerId = playerId;
     }
+
+    public PlayerEntity(UUID playerId, String name, GameEntity playerOne) {
+        this.playerId = playerId;
+        this.name = name;
+        this.playerOne = playerOne;
+    }
 }

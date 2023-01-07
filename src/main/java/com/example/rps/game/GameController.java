@@ -1,5 +1,8 @@
 package com.example.rps.game;
 
+import com.example.rps.player.PlayerEntity;
+import com.example.rps.player.PlayerRepository;
+import com.example.rps.player.UpdatePlayer;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +14,17 @@ import java.util.UUID;
 public class GameController {
 
     GameService gameService;
+    PlayerRepository playerRepository;
+
 
     @PostMapping("/start")
-    public GameEntity startGame(@RequestBody GameStatus gameStatus) {
-        return gameService.startGame(gameStatus);
+    public GameEntity startGame(@RequestHeader(value = "token") UUID playerId) {
+        PlayerEntity playerEntity = new PlayerEntity(
+                playerId,
+                playerRepository.findById(playerId).toString(),
+                new GameEntity());
+
+        return gameService.startGame(playerId, playerEntity);
     }
 
 /*    @GetMapping("/games/join/{gameId}")
