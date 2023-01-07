@@ -27,6 +27,13 @@ public class GameController {
         return gameService.startGame(playerId, playerEntity);
     }
 
+    @PostMapping("/join")
+    public GameStatus joinGame(@RequestHeader(value = "token") UUID gameId) {
+
+        return gameService.joinGame(gameId);
+    }
+
+
 /*    @GetMapping("/games/join/{gameId}")
     public Optional<GameEntity> joinGame(@PathVariable("gameId") UUID gameId,
                              @RequestBody GameStatus gameStatus) {

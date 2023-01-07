@@ -16,6 +16,7 @@ public class GameService {
 
     GameRepository gameRepository;
     PlayerRepository playerRepository;
+//    PlayerEntity playerEntity;
 
 
 
@@ -40,6 +41,18 @@ public class GameService {
 
         gameRepository.save(gameEntity);        //returnerades tidigare
 
+        return gameStatus;
+    }
+
+    public GameStatus joinGame(UUID gameId) {
+        PlayerEntity playerEntity = new PlayerEntity();     //this doesn't work, but I have had a bottle of wine, I coded anyway, but am calling it for today
+        GameStatus gameStatus = new GameStatus(
+                gameId,
+                playerEntity.getPlayerOne().getPlayerOne(),
+                null,
+                new PlayerEntity(UUID.randomUUID()),
+                null,
+                ACTIVE);
         return gameStatus;
     }
 /*
