@@ -28,9 +28,9 @@ public class GameController {
     }
 
     @PostMapping("/join")
-    public GameStatus joinGame(@RequestHeader(value = "token") UUID gameId) {
+    public GameStatus joinGame(@RequestHeader(value = "token") UUID gameId, UUID playerId) {
 
-        return gameService.joinGame(gameId);
+        return gameService.joinGame(gameId, playerId);
     }
 
 

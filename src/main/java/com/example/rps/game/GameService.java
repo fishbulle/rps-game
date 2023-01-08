@@ -3,6 +3,7 @@ package com.example.rps.game;
 import com.example.rps.player.PlayerEntity;
 import com.example.rps.player.PlayerRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.interceptor.AbstractCacheInvoker;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,39 +21,54 @@ public class GameService {
 
 
 
-    public GameStatus startGame(UUID playerID, PlayerEntity playerEntity) {
+    public GameStatus startGame(UUID playerId, PlayerEntity playerEntity) {
         UUID uuid = UUID.randomUUID();
         GameStatus gameStatus = new GameStatus(
                 uuid,
-                playerRepository.findById(playerID).get(),
+                playerRepository.findById(playerId).get(),
                 null,
                 null,
                 null,
                 OPEN);
-//        GameEntity gameEntity = new GameEntity(UUID.randomUUID());
-//        gameEntity.setGameStatus(gameStatus.getStatus());
-//        gameEntity.setPlayerOne(gameStatus.getName());
 
         GameEntity gameEntity = new GameEntity();
         gameEntity.setGameId(UUID.randomUUID());
         gameEntity.setGameStatus(OPEN);
         gameEntity.setPlayerOne(playerEntity.getPlayerOne().getPlayerOne());
-        gameEntity.setPlayerOne(playerRepository.findById(playerID).get());
+        gameEntity.setPlayerOne(playerRepository.findById(playerId).get());
 
         gameRepository.save(gameEntity);        //returnerades tidigare
 
         return gameStatus;
     }
 
-    public GameStatus joinGame(UUID gameId) {
+    public GameStatus joinGame(UUID gameId, UUID playerId) {
         PlayerEntity playerEntity = new PlayerEntity();     //this doesn't work, but I have had a bottle of wine, I coded anyway, but am calling it for today
+
+        // här vill vi hitta ett spel via gameId, visa spelaren som redan är ansluten,
+        // lägga in spelare 2 (namn & id), samt ändra status på spelet till ACTIVE
+
+        gameRepository.getReferenceById(gameId);  // här hämtar vi spelet som startades i metoden ovan
+
+        // if gameId exists .. bla bla
+        // else  bla bla
+
         GameStatus gameStatus = new GameStatus(
                 gameId,
                 playerEntity.getPlayerOne().getPlayerOne(),
                 null,
-                new PlayerEntity(UUID.randomUUID()),
+                playerEntity.getPlayerTwo().getPlayerTwo(),
                 null,
-                ACTIVE);
+                ACTIVE
+        );
+
+        GameEntity gameEntity = new GameEntity();
+        gameEntity.setGameStatus(ACTIVE);
+        gameEntity.setPlayerTwo(playerEntity.getPlayerTwo().getPlayerTwo());
+        gameEntity.setPlayerTwo(playerRepository.findById(playerId).get());
+
+        gameRepository.save(gameEntity);
+
         return gameStatus;
     }
 /*
