@@ -31,9 +31,9 @@ public class GameController {
     @PostMapping("/join")
     public GameStatus joinGame(@RequestHeader(value = "token") UUID gameId,
                                @RequestHeader(value = "token") UUID playerId,
-                               UpdatePlayer updatePlayer) throws NotFoundException {
+                               PlayerEntity playerEntity) throws NotFoundException {
 
-        return gameService.joinGame(gameId, playerId, updatePlayer);
+        return gameService.joinGame(gameId, playerId, playerEntity);
     }
 
 

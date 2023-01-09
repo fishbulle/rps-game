@@ -42,8 +42,8 @@ public class GameService {
 
     public GameStatus joinGame(UUID gameId,
                                UUID playerId,
-                               UpdatePlayer updatePlayer) throws NotFoundException {
-        //PlayerEntity playerEntity = new PlayerEntity();     //this doesn't work, but I have had a bottle of wine, I coded anyway, but am calling it for today
+                               PlayerEntity playerEntity) throws NotFoundException {
+       // PlayerEntity playerEntity = new PlayerEntity();     //this doesn't work, but I have had a bottle of wine, I coded anyway, but am calling it for today
 
         // här vill vi hitta ett spel via gameId
         // lägga in spelare 2 (namn & id), samt ändra status på spelet till ACTIVE
@@ -51,9 +51,9 @@ public class GameService {
         Optional<GameEntity> gameEntity = gameRepository.findById(gameId);  // här hämtar vi spelet som startades i metoden ovan
 
         if (gameEntity.isPresent()) {
+            gameEntity.get().setPlayerTwo(playerRepository.findById(playerId).get()); // hämtar id för spelare 2
+            gameEntity.get().setPlayerTwo(playerEntity.getPlayerTwoGame().getPlayerTwo()); // här är nåt fel
             gameEntity.get().setGameStatus(ACTIVE);
-            gameEntity.get().setPlayerTwo(updatePlayer.getPlayerTwoGame().getPlayerTwo());
-            gameEntity.get().setPlayerTwo(playerRepository.findById(playerId).get());
         }
         else {
             throw new NotFoundException("Game not found");
@@ -61,9 +61,9 @@ public class GameService {
 
         GameStatus gameStatus = new GameStatus(
                 gameId,
-                updatePlayer.getPlayerOneGame().getPlayerOne(),
+                playerEntity.getPlayerOneGame().getPlayerOne(),
                 null,
-                updatePlayer.getPlayerTwoGame().getPlayerTwo(),
+                playerEntity.getPlayerTwoGame().getPlayerTwo(),
                 null,
                 ACTIVE
         );
