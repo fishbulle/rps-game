@@ -1,9 +1,11 @@
 package com.example.rps.game;
 
+import com.example.rps.NotFoundException;
 import com.example.rps.player.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -45,6 +47,13 @@ public class GameService {
             gameRepository.save(gameEntity);
         }
 
+        playerRepository.getReferenceById(playerId).setPlayerTwoGame(gameEntity);
+
         return Optional.of(gameEntity);
+    }
+
+    public List<GameEntity> getOpenGames() {
+
+        return gameRepository.findAll();
     }
 }
