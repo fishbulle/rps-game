@@ -1,5 +1,6 @@
 package com.example.rps.game;
 
+import com.example.rps.NotFoundException;
 import com.example.rps.player.PlayerEntity;
 import com.example.rps.player.PlayerRepository;
 import com.example.rps.player.UpdatePlayer;
@@ -28,7 +29,7 @@ public class GameController {
     }
 
     @PostMapping("/join")
-    public GameStatus joinGame(@RequestHeader(value = "token") UUID gameId, UUID playerId) {
+    public GameStatus joinGame(@RequestHeader(value = "token") UUID gameId, UUID playerId) throws NotFoundException {
 
         return gameService.joinGame(gameId, playerId);
     }
