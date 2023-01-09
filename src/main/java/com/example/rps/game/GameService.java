@@ -19,6 +19,7 @@ public class GameService {
     GameRepository gameRepository;
     PlayerRepository playerRepository;
 
+
     public GameStatus startGame(UUID playerId, PlayerEntity playerEntity) {
         UUID uuid = UUID.randomUUID();
         GameStatus gameStatus = new GameStatus(
