@@ -1,6 +1,7 @@
 package com.example.rps.player;
 
 import com.example.rps.game.GameEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PlayerEntity {
 
     @Id
@@ -26,11 +28,13 @@ public class PlayerEntity {
     private String name;
 
     @OneToOne(mappedBy = "playerOne")  // mappar ihop GameEntity med PlayerEntity playerOne
-    @JsonIgnoreProperties("playerOne")
+    //@JsonIgnoreProperties("playerOne")
+    @JsonIgnore
     private GameEntity playerOneGame;
 
     @OneToOne(mappedBy = "playerTwo")
-    @JsonIgnoreProperties("playerTwo")
+    //@JsonIgnoreProperties("playerTwo")
+    @JsonIgnore
     private GameEntity playerTwoGame;
 
     public PlayerEntity(UUID playerId) {

@@ -53,7 +53,10 @@ public class GameService {
     }
 
     public List<GameEntity> getOpenGames() {
-
         return gameRepository.findAll();
     }
+
+/*    public Optional<GameEntity> gameInfo(UUID gameId) {
+        return null;
+    }*/
 }

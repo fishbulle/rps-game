@@ -38,6 +38,13 @@ public class GameController {
                 .collect(Collectors.toList());
     }
 
+/*    @GetMapping("/games/{gameId}")
+    public GameStatus gameInfo(@PathVariable("gameId") UUID gameId) {
+        return gameService.gameInfo(gameId)
+                .map(this::gameEntityToDTO)
+                .orElse(null);
+    }*/
+
     private GameStatus gameEntityToDTO(GameEntity gameEntity) {
 
         return new GameStatus(
