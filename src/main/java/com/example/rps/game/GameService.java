@@ -19,9 +19,6 @@ public class GameService {
 
     GameRepository gameRepository;
     PlayerRepository playerRepository;
-//    PlayerEntity playerEntity;
-
-
 
     public GameStatus startGame(UUID playerId, PlayerEntity playerEntity) {
         UUID uuid = UUID.randomUUID();
@@ -44,8 +41,10 @@ public class GameService {
         return gameStatus;
     }
 
-    public GameStatus joinGame(UUID gameId, UUID playerId) throws NotFoundException {
-        PlayerEntity playerEntity = new PlayerEntity();     //this doesn't work, but I have had a bottle of wine, I coded anyway, but am calling it for today
+    public GameStatus joinGame(UUID gameId,
+                               UUID playerId,
+                               PlayerEntity playerEntity) throws NotFoundException {
+        //PlayerEntity playerEntity = new PlayerEntity();     //this doesn't work, but I have had a bottle of wine, I coded anyway, but am calling it for today
 
         // här vill vi hitta ett spel via gameId
         // lägga in spelare 2 (namn & id), samt ändra status på spelet till ACTIVE
