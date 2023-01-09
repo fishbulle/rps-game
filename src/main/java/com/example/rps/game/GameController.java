@@ -46,6 +46,14 @@ public class GameController {
                 .orElse(null);
     }
 
+    @PostMapping("/games/move/{sign}")
+    public GameStatus makeMove(@PathVariable("sign") String sign,  // should it be String?
+                               @RequestHeader(value = "token") UUID playerId) {
+        return gameService.makeMove(sign, playerId)
+                .map(this::gameEntityToDTO)
+                .orElse(null);
+    }
+
     private GameStatus gameEntityToDTO(GameEntity gameEntity) {
 
         return new GameStatus(

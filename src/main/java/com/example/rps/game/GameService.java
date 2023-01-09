@@ -5,6 +5,7 @@ import com.example.rps.player.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -69,5 +70,13 @@ public class GameService {
         }
 
         return Optional.of(gameEntity);
+    }
+
+    public Optional<GameEntity> makeMove(String sign, UUID playerId) {
+
+        // find game
+        // set move
+
+        return null;
     }
 }
