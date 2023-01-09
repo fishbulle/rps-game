@@ -3,6 +3,7 @@ package com.example.rps.game;
 import com.example.rps.NotFoundException;
 import com.example.rps.player.PlayerEntity;
 import com.example.rps.player.PlayerRepository;
+import com.example.rps.player.UpdatePlayer;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.interceptor.AbstractCacheInvoker;
 import org.springframework.stereotype.Service;
@@ -46,7 +47,7 @@ public class GameService {
     public GameStatus joinGame(UUID gameId, UUID playerId) throws NotFoundException {
         PlayerEntity playerEntity = new PlayerEntity();     //this doesn't work, but I have had a bottle of wine, I coded anyway, but am calling it for today
 
-        // här vill vi hitta ett spel via gameId, visa spelaren som redan är ansluten,
+        // här vill vi hitta ett spel via gameId
         // lägga in spelare 2 (namn & id), samt ändra status på spelet till ACTIVE
 
         Optional<GameEntity> gameEntity = gameRepository.findById(gameId);  // här hämtar vi spelet som startades i metoden ovan
@@ -59,10 +60,8 @@ public class GameService {
         else {
             throw new NotFoundException("Game not found");
         }
-        // if gameId exists .. bla bla
-        // else  bla bla
 
-        return new GameStatus(
+        GameStatus gameStatus = new GameStatus(
                 gameId,
                 playerEntity.getPlayerOneGame().getPlayerOne(),
                 null,
@@ -70,6 +69,8 @@ public class GameService {
                 null,
                 ACTIVE
         );
+
+        return gameStatus;
     }
 /*
     public Optional<GameEntity> joinGame(UUID gameId, GameStatus gameStatus) {
