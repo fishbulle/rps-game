@@ -3,6 +3,7 @@ package com.example.rps.game;
 import com.example.rps.NotFoundException;
 import com.example.rps.player.PlayerEntity;
 import com.example.rps.player.PlayerRepository;
+import com.example.rps.player.UpdatePlayer;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,7 @@ public class GameService {
 
     public GameStatus joinGame(UUID gameId,
                                UUID playerId,
-                               PlayerEntity playerEntity) throws NotFoundException {
+                               UpdatePlayer updatePlayer) throws NotFoundException {
         //PlayerEntity playerEntity = new PlayerEntity();     //this doesn't work, but I have had a bottle of wine, I coded anyway, but am calling it for today
 
         // här vill vi hitta ett spel via gameId
@@ -51,7 +52,7 @@ public class GameService {
 
         if (gameEntity.isPresent()) {
             gameEntity.get().setGameStatus(ACTIVE);
-            gameEntity.get().setPlayerTwo(playerEntity.getPlayerTwoGame().getPlayerTwo());
+            gameEntity.get().setPlayerTwo(updatePlayer.getPlayerTwoGame().getPlayerTwo());
             gameEntity.get().setPlayerTwo(playerRepository.findById(playerId).get());
         }
         else {
@@ -60,9 +61,9 @@ public class GameService {
 
         GameStatus gameStatus = new GameStatus(
                 gameId,
-                playerEntity.getPlayerOneGame().getPlayerOne(),
+                updatePlayer.getPlayerOneGame().getPlayerOne(),
                 null,
-                playerEntity.getPlayerTwoGame().getPlayerTwo(),
+                updatePlayer.getPlayerTwoGame().getPlayerTwo(),
                 null,
                 ACTIVE
         );
