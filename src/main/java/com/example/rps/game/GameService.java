@@ -20,25 +20,25 @@ public class GameService {
     PlayerRepository playerRepository;
 
 
-    public GameStatus startGame(UUID playerId, PlayerEntity playerEntity) {
-        UUID uuid = UUID.randomUUID();
-        GameStatus gameStatus = new GameStatus(
-                uuid,
-                playerRepository.findById(playerId).get(),
+    public GameEntity startGame(UUID playerId) {
+        PlayerEntity playerEntity = playerRepository.findById(playerId);
+
+        GameEntity gameEntity = new GameEntity(
+                UUID.randomUUID(),
+                playerEntity,
                 null,
                 null,
                 null,
-                OPEN);
+                OPEN
+        );
 
-        GameEntity gameEntity = new GameEntity();
-        gameEntity.setGameId(UUID.randomUUID());
-        gameEntity.setGameStatus(OPEN);
-        gameEntity.setPlayerOne(playerEntity.getPlayerOneGame().getPlayerOne());
-        gameEntity.setPlayerOne(playerRepository.findById(playerId).get());
+        playerEntity.setPlayerOneGame(gameEntity);
+        gameEntity.setPlayerOne(playerEntity);
 
-        gameRepository.save(gameEntity);        // returnerades tidigare
+        gameRepository.save(gameEntity);
+        playerRepository.save(playerEntity);
 
-        return gameStatus;
+        return gameEntity;
     }
 
     public GameStatus joinGame(UUID gameId,
@@ -71,4 +71,25 @@ public class GameService {
 
         return gameStatus;
     }
+
+    /*    public GameStatus startGame(UUID playerId) {
+        UUID uuid = UUID.randomUUID();
+        GameStatus gameStatus = new GameStatus(
+                uuid,
+                playerRepository.findById(playerId).get(),
+                null,
+                null,
+                null,
+                OPEN);
+
+        GameEntity gameEntity = new GameEntity();
+        gameEntity.setGameId(UUID.randomUUID());
+        gameEntity.setGameStatus(OPEN);
+        gameEntity.setPlayerOne(playerEntity.getPlayerOneGame().getPlayerOne());
+        gameEntity.setPlayerOne(playerRepository.findById(playerId).get());
+
+        gameRepository.save(gameEntity);        // returnerades tidigare
+
+        return gameStatus;
+    }*/
 }
