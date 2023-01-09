@@ -52,7 +52,7 @@ public class GameService {
 
         if (gameEntity.isPresent()) {
             gameEntity.get().setPlayerTwo(playerRepository.findById(playerId).get()); // hämtar id för spelare och sätter den som player2
-            gameEntity.get().setPlayerTwo(playerEntity.getPlayerTwoGame().getPlayerTwo()); // här är nåt fel !!!!
+            gameEntity.get().setPlayerTwo(playerEntity.getPlayerTwoGame().getPlayerTwo()); // här är nåt fel !!!! se nedan
             gameEntity.get().setGameStatus(ACTIVE);
         }
         else {
@@ -64,7 +64,7 @@ public class GameService {
 
         return gameEntity.get();
 
-        /*Cannot invoke "com.example.rps.game.GameEntity.getPlayerTwo()"
-        because the return value of "com.example.rps.player.PlayerEntity.getPlayerTwoGame()" is null*/
+        /* Cannot invoke "com.example.rps.game.GameEntity.getPlayerTwo()"
+        because the return value of "com.example.rps.player.PlayerEntity.getPlayerTwoGame()" is null */
     }
 }
