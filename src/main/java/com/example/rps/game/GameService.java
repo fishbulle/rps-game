@@ -50,24 +50,4 @@ public class GameService {
 
         return Optional.of(gameEntity);
     }
-
-/*    public GameEntity joinGame(UUID gameId, UUID playerId) throws NotFoundException {
-
-        // här vill vi hitta ett spel via gameId
-        // lägga in spelare 2 (namn & id), samt ändra status på spelet till ACTIVE
-
-        Optional<GameEntity> gameEntity = gameRepository.findById(gameId);  // här hämtar vi spelet som startades i metoden ovan
-
-        if (gameEntity.isPresent()) {
-            gameEntity.get().setPlayerTwo(playerRepository.getReferenceById(playerId)); // hämtar id för spelare och sätter den som player2
-            gameEntity.get().setGameStatus(ACTIVE);
-        }
-        else {
-            throw new NotFoundException("Game not found");
-        }
-
-        gameRepository.save(gameEntity.get());
-
-        return gameEntity.get();
-    }*/
 }

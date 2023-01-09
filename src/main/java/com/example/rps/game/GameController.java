@@ -13,10 +13,8 @@ import java.util.UUID;
 public class GameController {
 
     GameService gameService;
-    PlayerRepository playerRepository;
 
-
-    @PostMapping("/start")
+    @PostMapping("start")
     public GameStatus startGame(@RequestHeader(value = "token") UUID playerId) {
 
         return gameService.startGame(playerId)
@@ -24,7 +22,7 @@ public class GameController {
                 .orElse(null);
     }
 
-    @PostMapping("/join/{gameId}")
+    @PostMapping("join/{gameId}")
     public GameStatus joinGame(@RequestHeader(value = "token") UUID playerId,
                                @PathVariable("gameId") UUID gameId) {
 
