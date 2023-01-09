@@ -3,9 +3,7 @@ package com.example.rps.game;
 import com.example.rps.NotFoundException;
 import com.example.rps.player.PlayerEntity;
 import com.example.rps.player.PlayerRepository;
-import com.example.rps.player.UpdatePlayer;
 import lombok.AllArgsConstructor;
-import org.springframework.cache.interceptor.AbstractCacheInvoker;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -36,7 +34,7 @@ public class GameService {
         gameEntity.setPlayerOne(playerEntity.getPlayerOneGame().getPlayerOne());
         gameEntity.setPlayerOne(playerRepository.findById(playerId).get());
 
-        gameRepository.save(gameEntity);        //returnerades tidigare
+        gameRepository.save(gameEntity);        // returnerades tidigare
 
         return gameStatus;
     }
@@ -71,19 +69,4 @@ public class GameService {
 
         return gameStatus;
     }
-/*
-    public Optional<GameEntity> joinGame(UUID gameId, GameStatus gameStatus) {
-
-        return gameRepository.findById(gameId)
-                .map(gameEntity -> {
-                    if (gameStatus.getOpponentName() == null)
-                        gameEntity.setPlayerTwo(gameStatus.getOpponentName());
-                    gameRepository.save(gameEntity);
-                    return gameEntity;
-                });
-
-    }
-*/
-
-
 }
