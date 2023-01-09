@@ -22,7 +22,7 @@ public class GameEntity {
     private UUID gameId;
 
     @OneToOne
-    @JoinColumn(name = "playerOne")
+    @JoinColumn(name = "playerOneGame")
     PlayerEntity playerOne;
 
     @Column(name = "player_move")
@@ -30,7 +30,7 @@ public class GameEntity {
     Move playerMove;              // tex istället för 1 står det ROCK
 
     @OneToOne
-    @JoinColumn(name = "playerTwo")
+    @JoinColumn(name = "playerTwoGame")
     PlayerEntity playerTwo;
 
     @Column(name = "opponent_move")

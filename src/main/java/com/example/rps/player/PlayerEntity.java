@@ -27,19 +27,19 @@ public class PlayerEntity {
 
     @OneToOne(mappedBy = "playerOne")  // mappar ihop GameEntity med PlayerEntity playerOne
     @JsonIgnoreProperties("playerOne")
-    private GameEntity playerOne;
+    private GameEntity playerOneGame;
 
     @OneToOne(mappedBy = "playerTwo")
     @JsonIgnoreProperties("playerTwo")
-    private GameEntity playerTwo;
+    private GameEntity playerTwoGame;
 
     public PlayerEntity(UUID playerId) {
         this.playerId = playerId;
     }
 
-    public PlayerEntity(UUID playerId, String name, GameEntity playerOne) {
+    public PlayerEntity(UUID playerId, String name, GameEntity playerOneGame) {
         this.playerId = playerId;
         this.name = name;
-        this.playerOne = playerOne;
+        this.playerOneGame = playerOneGame;
     }
 }

@@ -34,7 +34,7 @@ public class GameService {
         GameEntity gameEntity = new GameEntity();
         gameEntity.setGameId(UUID.randomUUID());
         gameEntity.setGameStatus(OPEN);
-        gameEntity.setPlayerOne(playerEntity.getPlayerOne().getPlayerOne());
+        gameEntity.setPlayerOne(playerEntity.getPlayerOneGame().getPlayerOne());
         gameEntity.setPlayerOne(playerRepository.findById(playerId).get());
 
         gameRepository.save(gameEntity);        //returnerades tidigare
@@ -55,16 +55,16 @@ public class GameService {
 
         GameStatus gameStatus = new GameStatus(
                 gameId,
-                playerEntity.getPlayerOne().getPlayerOne(),
+                playerEntity.getPlayerOneGame().getPlayerOne(),
                 null,
-                playerEntity.getPlayerTwo().getPlayerTwo(),
+                playerEntity.getPlayerTwoGame().getPlayerTwo(),
                 null,
                 ACTIVE
         );
 
         GameEntity gameEntity = new GameEntity();
         gameEntity.setGameStatus(ACTIVE);
-        gameEntity.setPlayerTwo(playerEntity.getPlayerTwo().getPlayerTwo());
+        gameEntity.setPlayerTwo(playerEntity.getPlayerTwoGame().getPlayerTwo());
         gameEntity.setPlayerTwo(playerRepository.findById(playerId).get());
 
         gameRepository.save(gameEntity);
