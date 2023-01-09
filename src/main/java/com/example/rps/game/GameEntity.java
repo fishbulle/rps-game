@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Entity(name = "game")
@@ -44,5 +45,4 @@ public class GameEntity {
     public GameEntity(UUID gameId) {
         this.gameId = gameId;
     }
-
 }

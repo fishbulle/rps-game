@@ -21,30 +21,29 @@ public class GameService {
 
 
     public GameEntity startGame(UUID playerId) {
-        PlayerEntity playerEntity = playerRepository.findById(playerId);
+        Optional<PlayerEntity> playerEntity = playerRepository.findById(playerId);
 
         GameEntity gameEntity = new GameEntity(
                 UUID.randomUUID(),
-                playerEntity,
+                playerEntity.get(),
                 null,
                 null,
                 null,
                 OPEN
         );
 
-        playerEntity.setPlayerOneGame(gameEntity);
-        gameEntity.setPlayerOne(playerEntity);
+        /*playerEntity.get().setPlayerOneGame(gameEntity);
+        gameEntity.setPlayerOne(playerEntity.get());*/
 
         gameRepository.save(gameEntity);
-        playerRepository.save(playerEntity);
+        playerRepository.save(playerEntity.get());
 
         return gameEntity;
     }
 
-    public GameStatus joinGame(UUID gameId,
+    public GameEntity joinGame(UUID gameId,
                                UUID playerId,
                                PlayerEntity playerEntity) throws NotFoundException {
-       // PlayerEntity playerEntity = new PlayerEntity();     //this doesn't work, but I have had a bottle of wine, I coded anyway, but am calling it for today
 
         // här vill vi hitta ett spel via gameId
         // lägga in spelare 2 (namn & id), samt ändra status på spelet till ACTIVE
@@ -52,44 +51,20 @@ public class GameService {
         Optional<GameEntity> gameEntity = gameRepository.findById(gameId);  // här hämtar vi spelet som startades i metoden ovan
 
         if (gameEntity.isPresent()) {
-            gameEntity.get().setPlayerTwo(playerRepository.findById(playerId).get()); // hämtar id för spelare 2
-            gameEntity.get().setPlayerTwo(playerEntity.getPlayerTwoGame().getPlayerTwo()); // här är nåt fel
+            gameEntity.get().setPlayerTwo(playerRepository.findById(playerId).get()); // hämtar id för spelare och sätter den som player2
+            gameEntity.get().setPlayerTwo(playerEntity.getPlayerTwoGame().getPlayerTwo()); // här är nåt fel !!!!
             gameEntity.get().setGameStatus(ACTIVE);
         }
         else {
             throw new NotFoundException("Game not found");
         }
 
-        GameStatus gameStatus = new GameStatus(
-                gameId,
-                playerEntity.getPlayerOneGame().getPlayerOne(),
-                null,
-                playerEntity.getPlayerTwoGame().getPlayerTwo(),
-                null,
-                ACTIVE
-        );
+        gameRepository.save(gameEntity.get());
+        playerRepository.save(playerEntity);
 
-        return gameStatus;
+        return gameEntity.get();
+
+        /*Cannot invoke "com.example.rps.game.GameEntity.getPlayerTwo()"
+        because the return value of "com.example.rps.player.PlayerEntity.getPlayerTwoGame()" is null*/
     }
-
-    /*    public GameStatus startGame(UUID playerId) {
-        UUID uuid = UUID.randomUUID();
-        GameStatus gameStatus = new GameStatus(
-                uuid,
-                playerRepository.findById(playerId).get(),
-                null,
-                null,
-                null,
-                OPEN);
-
-        GameEntity gameEntity = new GameEntity();
-        gameEntity.setGameId(UUID.randomUUID());
-        gameEntity.setGameStatus(OPEN);
-        gameEntity.setPlayerOne(playerEntity.getPlayerOneGame().getPlayerOne());
-        gameEntity.setPlayerOne(playerRepository.findById(playerId).get());
-
-        gameRepository.save(gameEntity);        // returnerades tidigare
-
-        return gameStatus;
-    }*/
 }
