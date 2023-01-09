@@ -1,8 +1,5 @@
 package com.example.rps.game;
 
-import com.example.rps.NotFoundException;
-import com.example.rps.player.PlayerEntity;
-import com.example.rps.player.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +9,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class GameController {
 
-    GameService gameService;
+    private final GameService gameService;
 
     @PostMapping("start")
     public GameStatus startGame(@RequestHeader(value = "token") UUID playerId) {

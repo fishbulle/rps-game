@@ -1,9 +1,6 @@
 package com.example.rps.game;
 
-import com.example.rps.NotFoundException;
-import com.example.rps.player.PlayerEntity;
 import com.example.rps.player.PlayerRepository;
-import com.example.rps.player.UpdatePlayer;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

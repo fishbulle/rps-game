@@ -1,17 +1,15 @@
 package com.example.rps.player;
 
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
+@AllArgsConstructor
 public class PlayerController {
 
     private final PlayerService playerService;
-
-    public PlayerController(PlayerService playerService) {
-        this.playerService = playerService;
-    }
 
     @GetMapping("auth/token")
     public UUID getToken() {            // playerService.getToken returns PlayerEntity. Here we get id from the entity, and return it.
