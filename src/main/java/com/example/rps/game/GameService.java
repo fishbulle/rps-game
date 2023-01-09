@@ -35,8 +35,8 @@ public class GameService {
         return Optional.of(gameEntity);
     }
 
-    public Optional<GameEntity> joinGame(UUID playerId, UUID gameId) {
-        GameEntity gameEntity = new GameEntity();
+    public Optional<GameEntity> joinGame(UUID playerId, UUID gameId) throws NotFoundException {
+        GameEntity gameEntity;
 
         if (gameRepository.existsById(gameId)) {
             gameEntity = gameRepository.findById(gameId).get();
@@ -45,6 +45,8 @@ public class GameService {
             gameEntity.setGameStatus(ACTIVE);
 
             gameRepository.save(gameEntity);
+        } else {
+            throw new NotFoundException("Something went wrong.");
         }
 
         playerRepository.getReferenceById(playerId).setPlayerTwoGame(gameEntity);
@@ -56,7 +58,16 @@ public class GameService {
         return gameRepository.findAll();
     }
 
-/*    public Optional<GameEntity> gameInfo(UUID gameId) {
-        return null;
-    }*/
+    public Optional<GameEntity> gameInfo(UUID gameId) throws NotFoundException {
+
+        GameEntity gameEntity;
+
+        if (gameRepository.existsById(gameId)) {
+            gameEntity = gameRepository.findById(gameId).get();
+        } else {
+            throw new NotFoundException("Game not found.");
+        }
+
+        return Optional.of(gameEntity);
+    }
 }

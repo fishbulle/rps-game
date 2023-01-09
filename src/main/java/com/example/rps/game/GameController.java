@@ -1,5 +1,6 @@
 package com.example.rps.game;
 
+import com.example.rps.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class GameController {
 
     @PostMapping("/join/{gameId}")
     public GameStatus joinGame(@RequestHeader(value = "token") UUID playerId,
-                               @PathVariable("gameId") UUID gameId) {
+                               @PathVariable("gameId") UUID gameId) throws NotFoundException {
 
         return gameService.joinGame(playerId, gameId)
                 .map(this::gameEntityToDTO)
@@ -38,12 +39,12 @@ public class GameController {
                 .collect(Collectors.toList());
     }
 
-/*    @GetMapping("/games/{gameId}")
-    public GameStatus gameInfo(@PathVariable("gameId") UUID gameId) {
+    @GetMapping("/games/{gameId}")
+    public GameStatus gameInfo(@PathVariable("gameId") UUID gameId) throws NotFoundException {
         return gameService.gameInfo(gameId)
                 .map(this::gameEntityToDTO)
                 .orElse(null);
-    }*/
+    }
 
     private GameStatus gameEntityToDTO(GameEntity gameEntity) {
 
