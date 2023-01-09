@@ -19,19 +19,18 @@ public class GameController {
     @PostMapping("/start")
     public GameStatus startGame(@RequestHeader(value = "token") UUID playerId) {
 
-        return gameEntityToDTO(
-                gameService.startGame(playerId)
-        );
+        return gameService.startGame(playerId)
+                .map(this::gameEntityToDTO)
+                .orElse(null);
     }
 
     @PostMapping("/join/{gameId}")
-    public GameStatus joinGame(@PathVariable("gameId") UUID gameId,
-                               @RequestHeader(value = "token") UUID playerId,
-                               PlayerEntity playerEntity) throws NotFoundException {
+    public GameStatus joinGame(@RequestHeader(value = "token") UUID playerId,
+                               @PathVariable("gameId") UUID gameId) {
 
-        return gameEntityToDTO(
-                gameService.joinGame(gameId, playerId, playerEntity)
-        );
+        return gameService.joinGame(playerId, gameId)
+                .map(this::gameEntityToDTO)
+                .orElse(null);
     }
 
     private GameStatus gameEntityToDTO(GameEntity gameEntity) {
