@@ -19,6 +19,7 @@ public class GameService {
 
     GameRepository gameRepository;
     PlayerRepository playerRepository;
+    GameEngine gameEngine;
 
 
     public Optional<GameEntity> startGame(UUID playerId) {
@@ -99,6 +100,9 @@ public class GameService {
         } else {
             throw new NotFoundException("Game not found.");
         }
+
+        Status result = gameEngine.evaluteMove(gameEntity.getPlayerMove(), gameEntity.getOpponentMove());
+        gameEntity.setGameStatus(result);
 
         gameRepository.save(gameEntity);
 

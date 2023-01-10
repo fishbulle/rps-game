@@ -2,11 +2,28 @@ package com.example.rps.game;
 
 public enum Move {
 
-    ROCK,
-    PAPER,
-    SCISSORS
+    ROCK {
+        @Override
+        public boolean beats(Move move) {
+            return (SCISSORS == move);
+        }
+    },
 
-    // skapa metod "isBetterThan" eller "Beats" ??
+    PAPER {
+        @Override
+        public boolean beats(Move move) {
+            return (ROCK == move);
+        }
+    },
+
+    SCISSORS {
+        @Override
+        public boolean beats(Move move) {
+            return (PAPER == move);
+        }
+    };
+
+    public abstract boolean beats(Move move);
 
 }
 
