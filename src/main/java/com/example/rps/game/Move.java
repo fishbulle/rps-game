@@ -1,5 +1,9 @@
 package com.example.rps.game;
 
+/**
+ * Allowed moves and what move beats what
+ * **/
+
 public enum Move {
 
     ROCK {
