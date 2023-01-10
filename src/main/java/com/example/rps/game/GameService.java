@@ -101,7 +101,7 @@ public class GameService {
             throw new NotFoundException("Game not found.");
         }
 
-        Status result = gameEngine.evaluteMove(gameEntity.getPlayerMove(), gameEntity.getOpponentMove());
+        Status result = gameEngine.evaluateMove(gameEntity.getPlayerMove(), gameEntity.getOpponentMove());
         gameEntity.setGameStatus(result);
 
         gameRepository.save(gameEntity);

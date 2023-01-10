@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GameEngine {
 
-    public Status evaluteMove(Move playerOne, Move playerTwo) {
+    public Status evaluateMove(Move playerOne, Move playerTwo) {
 
         Status result = Status.DRAW;
 
