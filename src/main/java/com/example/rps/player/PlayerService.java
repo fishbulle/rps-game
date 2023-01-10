@@ -24,7 +24,7 @@ public class PlayerService {
         Optional<PlayerEntity> playerEntity = playerRepository.findById(playerId);      // return playerEntity with UUID playerId if it exists
 
         if (playerEntity.isPresent()) {                             // if player with ID (token) exists,
-            playerEntity.get().setName(updatePlayer.getName());     // set name for player entity object found by player ID
+            playerEntity.get().setName(updatePlayer.name());     // set name for player entity object found by player ID
             playerRepository.save(playerEntity.get());              // save
         }
     }
