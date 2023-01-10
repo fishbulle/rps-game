@@ -11,6 +11,4 @@ public record GameStatus(UUID gameId,
                          Move opponentMove,
                          Status status) {
 
-    // DTO
-
 }

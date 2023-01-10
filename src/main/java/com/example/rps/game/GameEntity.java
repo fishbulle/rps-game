@@ -43,8 +43,4 @@ public class GameEntity {
     @Column(name = "game_status")
     @Enumerated(EnumType.STRING)
     Status gameStatus;
-
-    public GameEntity(UUID gameId) {
-        this.gameId = gameId;
-    }
 }

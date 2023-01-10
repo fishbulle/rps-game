@@ -7,7 +7,4 @@ public enum Status {
     WIN,
     LOSE,
     DRAW
-
-    // använda enum i switch statement tex case NONE -> System.out.println("Inget aktivt spel hittades.") i service ??
-
 }
