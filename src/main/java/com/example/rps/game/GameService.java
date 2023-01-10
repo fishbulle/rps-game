@@ -1,6 +1,7 @@
 package com.example.rps.game;
 
 import com.example.rps.NotFoundException;
+import com.example.rps.player.PlayerEntity;
 import com.example.rps.player.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -72,11 +73,24 @@ public class GameService {
         return Optional.of(gameEntity);
     }
 
-    public Optional<GameEntity> makeMove(String sign, UUID playerId) {
+    public Optional<GameEntity> makeMove(String sign,
+                                         UUID playerId,
+                                         UUID gameId) throws NotFoundException {
+        GameEntity gameEntity;
 
-        // find game
-        // set move
+        if (gameRepository.existsById(gameId)) {
+            gameEntity = gameRepository.findById(gameId).get();
+            if (playerRepository.existsById(playerId)) {
+                if (playerRepository.getReferenceById(playerId).equals(gameEntity.getPlayerOne())) {
+                    gameEntity.setPlayerMove(Move.valueOf(sign));
+                } else {
+                    gameEntity.setOpponentMove(Move.valueOf(sign));
+                }
+            }
+        } else {
+            throw new NotFoundException("Game not found.");
+        }
 
-        return null;
+        return Optional.of(gameEntity);
     }
 }

@@ -47,9 +47,10 @@ public class GameController {
     }
 
     @PostMapping("/games/move/{sign}")
-    public GameStatus makeMove(@PathVariable("sign") String sign,  // should it be String?
-                               @RequestHeader(value = "token") UUID playerId) {
-        return gameService.makeMove(sign, playerId)
+    public GameStatus makeMove(@PathVariable("sign") String sign,
+                               @RequestHeader(value = "token") UUID playerId,
+                               @RequestBody UUID gameId) throws NotFoundException {
+        return gameService.makeMove(sign, playerId, gameId)
                 .map(this::gameEntityToDTO)
                 .orElse(null);
     }
