@@ -78,27 +78,29 @@ public class GameService {
                                          UUID gameId) throws NotFoundException {
         GameEntity gameEntity;
 
-        if (gameRepository.existsById(gameId)) {
-            gameEntity = gameRepository.findById(gameId).get();
-            if (playerRepository.existsById(playerId)) {
-                if (playerRepository.getReferenceById(playerId).equals(gameEntity.getPlayerOne())) {
-                    switch (sign) {
-                        case "rock" -> gameEntity.setPlayerMove(Move.ROCK);
-                        case "paper" -> gameEntity.setPlayerMove(Move.PAPER);
-                        case "scissors" -> gameEntity.setPlayerMove(Move.SCISSORS);
-                    }
+        if (gameRepository.existsById(gameStatus.gameId())) {
+            gameEntity = gameRepository.findById(gameStatus.gameId()).get();
+            //if (playerRepository.existsById(playerId)) {
+            if (gameEntity.playerOne.getPlayerId().equals(playerId)) {
+                switch (sign) {
+                    case "rock" -> gameEntity.setPlayerMove(Move.ROCK);
+                    case "paper" -> gameEntity.setPlayerMove(Move.PAPER);
+                    case "scissors" -> gameEntity.setPlayerMove(Move.SCISSORS);
                 }
-                if (playerRepository.getReferenceById(playerId).equals(gameEntity.getPlayerTwo())) {
-                    switch (sign) {
-                        case "rock" -> gameEntity.setOpponentMove(Move.ROCK);
-                        case "paper" -> gameEntity.setOpponentMove(Move.PAPER);
-                        case "scissors" -> gameEntity.setOpponentMove(Move.SCISSORS);
-                    }
+            }
+            // if (playerRepository.getReferenceById(playerId).equals(gameEntity.getPlayerTwo()))
+            if (gameEntity.playerTwo.getPlayerId().equals(playerId)) {
+                switch (sign) {
+                    case "rock" -> gameEntity.setOpponentMove(Move.ROCK);
+                    case "paper" -> gameEntity.setOpponentMove(Move.PAPER);
+                    case "scissors" -> gameEntity.setOpponentMove(Move.SCISSORS);
                 }
             }
         } else {
             throw new NotFoundException("Game not found.");
         }
+
+        gameRepository.save(gameEntity);
 
         return Optional.of(gameEntity);
     }
