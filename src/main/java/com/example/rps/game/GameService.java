@@ -75,7 +75,7 @@ public class GameService {
 
     public Optional<GameEntity> makeMove(String sign,
                                          UUID playerId,
-                                         UUID gameId) throws NotFoundException {
+                                         GameStatus gameStatus) throws NotFoundException {
         GameEntity gameEntity;
 
         if (gameRepository.existsById(gameStatus.gameId())) {
