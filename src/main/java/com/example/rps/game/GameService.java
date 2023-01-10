@@ -96,11 +96,14 @@ public class GameService {
         } else {
             throw new NotFoundException("Game not found.");
         }
-
-        Status result = gameEngine.evaluateMove(gameEntity.getPlayerMove(), gameEntity.getOpponentMove());
-        gameEntity.setGameStatus(result);
-
         gameRepository.save(gameEntity);
+
+        if (gameEntity.getOpponentMove() != null
+                && gameEntity.getPlayerMove() != null ) {
+
+            Status result = gameEngine.evaluateMove(gameEntity.getPlayerMove(), gameEntity.getOpponentMove());
+            gameEntity.setGameStatus(result);
+        }
 
         return Optional.of(gameEntity);
     }
