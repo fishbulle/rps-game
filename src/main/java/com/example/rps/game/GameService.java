@@ -1,12 +1,10 @@
 package com.example.rps.game;
 
 import com.example.rps.NotFoundException;
-import com.example.rps.player.PlayerEntity;
 import com.example.rps.player.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -81,7 +79,6 @@ public class GameService {
 
         if (gameRepository.existsById(gameStatus.gameId())) {
             gameEntity = gameRepository.findById(gameStatus.gameId()).get();
-            //if (playerRepository.existsById(playerId)) {
             if (gameEntity.playerOne.getPlayerId().equals(playerId)) {
                 switch (sign) {
                     case "rock" -> gameEntity.setPlayerMove(Move.ROCK);
@@ -89,7 +86,6 @@ public class GameService {
                     case "scissors" -> gameEntity.setPlayerMove(Move.SCISSORS);
                 }
             }
-            // if (playerRepository.getReferenceById(playerId).equals(gameEntity.getPlayerTwo()))
             if (gameEntity.playerTwo.getPlayerId().equals(playerId)) {
                 switch (sign) {
                     case "rock" -> gameEntity.setOpponentMove(Move.ROCK);
