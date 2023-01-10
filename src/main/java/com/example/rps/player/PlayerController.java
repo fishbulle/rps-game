@@ -9,7 +9,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PlayerController {
 
-    private final PlayerService playerService;
+    PlayerService playerService;
 
     @GetMapping("/auth/token")
     public UUID getToken() {

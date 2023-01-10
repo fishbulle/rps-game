@@ -10,7 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PlayerService {
 
-    private final PlayerRepository playerRepository;
+    PlayerRepository playerRepository;
 
     public PlayerEntity getToken() {
         PlayerEntity playerEntity = new PlayerEntity(   // create a new player entity object with token (UUID)

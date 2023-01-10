@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class GameController {
 
-    private final GameService gameService;
+    GameService gameService;
 
     @PostMapping("/start")
     public GameStatus startGame(@RequestHeader(value = "token") UUID playerId) {
@@ -35,8 +35,8 @@ public class GameController {
     public List<GameEntity> getOpenGames() {
         return gameService.getOpenGames()
                 .stream()
-                .filter(games -> games.gameStatus.equals(Status.OPEN))
-                .collect(Collectors.toList());
+                .filter(games -> games.gameStatus.equals(Status.OPEN))  // filter games on status OPEN
+                .collect(Collectors.toList());                          // collect them to a list
     }
 
     @GetMapping("/games/{gameId}")
