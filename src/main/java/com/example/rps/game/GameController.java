@@ -64,7 +64,7 @@ public class GameController {
                 gameEntity.getPlayerTwo(),
                 gameEntity.getOpponentMove(),
                 gameEntity.getGameStatus()
-                );
+        );
     }
 
 }

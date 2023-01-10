@@ -5,9 +5,9 @@ import com.example.rps.player.PlayerEntity;
 import java.util.UUID;
 
 public record GameStatus(UUID gameId,
-                         PlayerEntity name,
+                         PlayerEntity playerOne,
                          Move move,
-                         PlayerEntity opponentName,
+                         PlayerEntity playerTwo,
                          Move opponentMove,
                          Status status) {
 

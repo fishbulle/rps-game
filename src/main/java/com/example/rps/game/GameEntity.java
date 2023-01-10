@@ -43,4 +43,5 @@ public class GameEntity {
     @Column(name = "game_status")
     @Enumerated(EnumType.STRING)
     Status gameStatus;
+
 }
