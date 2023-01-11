@@ -20,7 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class PlayerEntity  {
+public class PlayerEntity {
 
     @Id
     @Column(name = "player_id")
