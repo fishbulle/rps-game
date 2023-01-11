@@ -47,7 +47,7 @@ public class GameService {
 
             gameRepository.save(gameEntity);
         } else {
-            throw new NotFoundException("Something went wrong.");
+            throw new NotFoundException("Game not found.");
         }
 
         playerRepository.getReferenceById(playerId).setPlayerTwoGame(gameEntity);
