@@ -11,7 +11,7 @@ public class GameEngine {
 
     /**
      * Takes playerOne Move (enum) and playerTwo Move and
-     * evaluates the result from playerOne's perspective
+     * evaluates the result (from playerOne's perspective)
      * **/
 
     public Status evaluateMove(Move playerOne, Move playerTwo) {

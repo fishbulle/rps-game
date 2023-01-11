@@ -78,7 +78,6 @@ public class GameService {
 
         if (gameRepository.existsById(gameId)) {
             gameEntity = gameRepository.findById(gameId).get();
-
             if (gameEntity.playerOne.getPlayerId().equals(playerId)) {
                 if (gameEntity.getPlayerMove().beats(gameEntity.getOpponentMove())) {
                     gameEntity.setGameStatus(WIN);
@@ -130,6 +129,7 @@ public class GameService {
         } else {
             throw new NotFoundException("Game not found.");
         }
+
         gameRepository.save(gameEntity);
 
         if (gameEntity.getOpponentMove() != null
