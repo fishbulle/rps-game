@@ -46,6 +46,14 @@ public class GameController {
                 .orElse(null);
     }
 
+    @GetMapping("/games/result/{gameId}")
+    public GameStatus gameResult(@PathVariable("gameId") UUID gameId,
+                                 @RequestHeader(value = "token") UUID playerId) throws NotFoundException {
+        return gameService.gameResult(gameId, playerId)
+                .map(this::gameEntityToDTO)
+                .orElse(null);
+    }
+
     @PostMapping("/games/move/{sign}")
     public GameStatus makeMove(@PathVariable("sign") String sign,
                                @RequestHeader(value = "token") UUID playerId,

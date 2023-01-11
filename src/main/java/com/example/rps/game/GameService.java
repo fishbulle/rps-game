@@ -60,7 +60,6 @@ public class GameService {
     }
 
     public Optional<GameEntity> gameInfo(UUID gameId) throws NotFoundException {
-
         GameEntity gameEntity;
 
         if (gameRepository.existsById(gameId)) {
@@ -68,6 +67,41 @@ public class GameService {
         } else {
             throw new NotFoundException("Game not found.");
         }
+
+        return Optional.of(gameEntity);
+    }
+
+    public Optional<GameEntity> gameResult(UUID gameId, UUID playerId) throws NotFoundException {
+        GameEntity gameEntity;
+
+        // output changes depending on who is checking (player 1 vs player 2)
+
+        if (gameRepository.existsById(gameId)) {
+            gameEntity = gameRepository.findById(gameId).get();
+
+            if (gameEntity.playerOne.getPlayerId().equals(playerId)) {
+                if (gameEntity.getPlayerMove().beats(gameEntity.getOpponentMove())) {
+                    gameEntity.setGameStatus(WIN);
+                } else if (gameEntity.getOpponentMove().beats(gameEntity.getPlayerMove())) {
+                    gameEntity.setGameStatus(LOSE);
+                } else {
+                    gameEntity.setGameStatus(DRAW);
+                }
+            }
+            if (gameEntity.playerTwo.getPlayerId().equals(playerId)) {
+                if (gameEntity.getOpponentMove().beats(gameEntity.getPlayerMove())) {
+                    gameEntity.setGameStatus(WIN);
+                } else if (gameEntity.getPlayerMove().beats(gameEntity.getOpponentMove())) {
+                    gameEntity.setGameStatus(LOSE);
+                } else {
+                    gameEntity.setGameStatus(DRAW);
+                }
+            }
+        } else {
+            throw new NotFoundException("Game not found.");
+        }
+
+        gameRepository.save(gameEntity);
 
         return Optional.of(gameEntity);
     }
@@ -99,8 +133,7 @@ public class GameService {
         gameRepository.save(gameEntity);
 
         if (gameEntity.getOpponentMove() != null
-                && gameEntity.getPlayerMove() != null ) {
-
+                && gameEntity.getPlayerMove() != null) {
             Status result = gameEngine.evaluateMove(gameEntity.getPlayerMove(), gameEntity.getOpponentMove());
             gameEntity.setGameStatus(result);
         }
