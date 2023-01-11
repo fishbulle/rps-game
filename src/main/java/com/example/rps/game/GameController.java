@@ -46,6 +46,8 @@ public class GameController {
                 .orElse(null);
     }
 
+    // same as above method except it shows different status (win/lose)
+    // depending on whether it's player1 or player2 checking
     @GetMapping("/games/result/{gameId}")
     public GameStatus gameResult(@PathVariable("gameId") UUID gameId,
                                  @RequestHeader(value = "token") UUID playerId) throws NotFoundException {

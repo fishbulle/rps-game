@@ -6,10 +6,7 @@ import com.example.rps.security.user.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -17,6 +14,7 @@ import java.util.UUID;
 @Table(name = "Players")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -28,15 +26,6 @@ public class PlayerEntity {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "username")
-    private String username;
-
-    @Column(name = "password")
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
 
     @OneToOne(mappedBy = "playerOne")
     @JsonIgnore
