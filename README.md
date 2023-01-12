@@ -1,4 +1,10 @@
 ## School project
 
-A Rock Paper Scissors API with Spring Web, Spring Data JPA and PostgreSQL
-with JWT authentication and authorization.
+A Rock Paper Scissors API created with: 
+#### Java 17, 
+Spring Starter Web, 
+Spring Data JPA, 
+Spring Security, 
+Lombok,
+PostgreSQL
+JWT
