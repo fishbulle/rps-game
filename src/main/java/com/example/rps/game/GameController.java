@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class GameController {
 
-    GameService gameService;
+    private final GameService gameService;
 
     @PostMapping("/start")
     public GameStatus startGame(@RequestHeader(value = "token") UUID playerId) {
@@ -76,5 +76,4 @@ public class GameController {
                 gameEntity.getGameStatus()
         );
     }
-
 }

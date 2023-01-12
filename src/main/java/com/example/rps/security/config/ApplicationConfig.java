@@ -1,6 +1,5 @@
 package com.example.rps.security.config;
 
-import com.example.rps.player.PlayerRepository;
 import com.example.rps.security.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

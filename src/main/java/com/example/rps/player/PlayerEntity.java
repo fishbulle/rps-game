@@ -1,7 +1,6 @@
 package com.example.rps.player;
 
 import com.example.rps.game.GameEntity;
-import com.example.rps.security.user.Role;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

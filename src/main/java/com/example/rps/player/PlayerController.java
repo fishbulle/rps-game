@@ -10,7 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PlayerController {
 
-    PlayerService playerService;
+    private final PlayerService playerService;
 
     @GetMapping("/auth/token")
     public UUID getToken() {

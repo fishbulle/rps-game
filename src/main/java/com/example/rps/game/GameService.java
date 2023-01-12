@@ -15,10 +15,9 @@ import static com.example.rps.game.Status.*;
 @AllArgsConstructor
 public class GameService {
 
-    GameRepository gameRepository;
-    PlayerRepository playerRepository;
-    GameEngine gameEngine;
-
+    private final GameRepository gameRepository;
+    private final PlayerRepository playerRepository;
+    private final GameEngine gameEngine;
 
     public Optional<GameEntity> startGame(UUID playerId) {
         GameEntity gameEntity = new GameEntity(

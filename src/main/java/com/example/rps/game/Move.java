@@ -28,6 +28,5 @@ public enum Move {
     };
 
     public abstract boolean beats(Move move);
-
 }
 
