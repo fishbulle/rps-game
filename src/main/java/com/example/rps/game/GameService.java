@@ -38,7 +38,9 @@ public class GameService {
     public Optional<GameEntity> joinGame(UUID playerId, UUID gameId) throws NotFoundException {
         GameEntity gameEntity;
 
-        if (gameRepository.existsById(gameId)) {
+        // lägga till if (spelet is ACTIVE) sout "Game is full" ??
+
+        if (gameRepository.existsById(gameId) ) {
             gameEntity = gameRepository.findById(gameId).get();
 
             gameEntity.setPlayerTwo(playerRepository.getReferenceById(playerId));
