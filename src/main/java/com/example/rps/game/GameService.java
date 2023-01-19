@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.example.rps.game.Result.*;
 import static com.example.rps.game.Status.*;
 
 @Service
@@ -26,7 +27,8 @@ public class GameService {
                 null,
                 null,
                 null,
-                OPEN
+                OPEN,
+                null
         );
 
         gameRepository.save(gameEntity);
@@ -81,20 +83,20 @@ public class GameService {
             gameEntity = gameRepository.findById(gameId).get();
             if (gameEntity.playerOne.getPlayerId().equals(playerId)) {
                 if (gameEntity.getPlayerMove().beats(gameEntity.getOpponentMove())) {
-                    gameEntity.setGameStatus(WIN);
+                    gameEntity.setGameResult(WIN);
                 } else if (gameEntity.getOpponentMove().beats(gameEntity.getPlayerMove())) {
-                    gameEntity.setGameStatus(LOSE);
+                    gameEntity.setGameResult(LOSE);
                 } else {
-                    gameEntity.setGameStatus(DRAW);
+                    gameEntity.setGameResult(DRAW);
                 }
             }
             if (gameEntity.playerTwo.getPlayerId().equals(playerId)) {
                 if (gameEntity.getOpponentMove().beats(gameEntity.getPlayerMove())) {
-                    gameEntity.setGameStatus(WIN);
+                    gameEntity.setGameResult(WIN);
                 } else if (gameEntity.getPlayerMove().beats(gameEntity.getOpponentMove())) {
-                    gameEntity.setGameStatus(LOSE);
+                    gameEntity.setGameResult(LOSE);
                 } else {
-                    gameEntity.setGameStatus(DRAW);
+                    gameEntity.setGameResult(DRAW);
                 }
             }
         } else {
@@ -133,8 +135,9 @@ public class GameService {
 
         if (gameEntity.getOpponentMove() != null
                 && gameEntity.getPlayerMove() != null) {
-            Status result = gameEngine.evaluateMove(gameEntity.getPlayerMove(), gameEntity.getOpponentMove());
-            gameEntity.setGameStatus(result);
+            Result result = gameEngine.evaluateMove(gameEntity.getPlayerMove(), gameEntity.getOpponentMove());
+            gameEntity.setGameResult(result);
+            gameEntity.setGameStatus(FINISHED);
 
             System.out.println(gameEntity.playerOne.getName() + " " + result + "!");
             // make it so result is not a "status" but a "result", and tie it with players i.e. Player One result, Player Two result ?

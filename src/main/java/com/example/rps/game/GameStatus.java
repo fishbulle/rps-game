@@ -9,6 +9,7 @@ public record GameStatus(UUID gameId,
                          Move move,
                          PlayerEntity playerTwo,
                          Move opponentMove,
-                         Status status) {
+                         Status status,
+                         Result result) {
 
 }

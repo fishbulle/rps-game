@@ -2,10 +2,10 @@ package com.example.rps.game;
 
 public enum Status {
 
-    NONE,
+    FINISHED,
     OPEN,
     ACTIVE,
-    WIN,
+/*    WIN,
     LOSE,
-    DRAW
+    DRAW*/
 }

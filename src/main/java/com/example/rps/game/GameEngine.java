@@ -14,16 +14,14 @@ public class GameEngine {
      * evaluates the result (from playerOne's perspective)
      * **/
 
-    public Status evaluateMove(Move playerOne, Move playerTwo) {
+    public Result evaluateMove(Move playerOne, Move playerTwo) {
 
-        Status result = Status.DRAW;
+        Result result = Result.DRAW;
 
         if (playerOne.beats(playerTwo)) {
-            result = Status.WIN;
-        }
-
-        else if (playerTwo.beats(playerOne)) {
-            result = Status.LOSE;
+            result = Result.WIN;
+        } else if (playerTwo.beats(playerOne)) {
+            result = Result.LOSE;
         }
 
         return result;

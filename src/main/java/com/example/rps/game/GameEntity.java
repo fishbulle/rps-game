@@ -42,4 +42,8 @@ public class GameEntity {
     @Column(name = "game_status")
     @Enumerated(EnumType.STRING)
     Status gameStatus;
+
+    @Column(name = "game_result")
+    @Enumerated(EnumType.STRING)
+    Result gameResult;
 }
