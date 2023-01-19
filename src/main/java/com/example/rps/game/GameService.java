@@ -140,7 +140,6 @@ public class GameService {
             gameEntity.setGameStatus(FINISHED);
 
             System.out.println(gameEntity.playerOne.getName() + " " + result + "!");
-            // make it so result is not a "status" but a "result", and tie it with players i.e. Player One result, Player Two result ?
         }
 
         gameRepository.save(gameEntity);
