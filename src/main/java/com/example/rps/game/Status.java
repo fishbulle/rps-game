@@ -5,7 +5,4 @@ public enum Status {
     FINISHED,
     OPEN,
     ACTIVE,
-/*    WIN,
-    LOSE,
-    DRAW*/
 }

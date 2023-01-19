@@ -2,6 +2,7 @@ package com.example.rps.player;
 
 import com.example.rps.game.GameEntity;
 
+import com.example.rps.game.Move;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -25,6 +26,10 @@ public class PlayerEntity {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "move")
+    @Enumerated(EnumType.STRING)
+    private Move move;
 
     @OneToOne(mappedBy = "playerOne")
     @JsonIgnore

@@ -70,9 +70,7 @@ public class GameController {
         return new GameStatus(
                 gameEntity.getGameId(),
                 gameEntity.getPlayerOne(),
-                gameEntity.getPlayerMove(),
                 gameEntity.getPlayerTwo(),
-                gameEntity.getOpponentMove(),
                 gameEntity.getGameStatus(),
                 gameEntity.getGameResult()
         );

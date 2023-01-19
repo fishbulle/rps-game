@@ -27,17 +27,17 @@ public class GameEntity {
     @JoinColumn(name = "player1_id")
     PlayerEntity playerOne;
 
-    @Column(name = "player_move")
+/*    @Column(name = "player_one_move")
     @Enumerated(EnumType.STRING)  // enumerated gör så att det står med bokstäver istället för siffror
-    Move playerMove;              // tex istället för 1 står det ROCK
+    Move playerOneMove;              // tex istället för 1 står det ROCK*/
 
     @OneToOne
     @JoinColumn(name = "player2_id")
     PlayerEntity playerTwo;
 
-    @Column(name = "opponent_move")
+/*    @Column(name = "player_two_move")
     @Enumerated(EnumType.STRING)
-    Move opponentMove;
+    Move playerTwoMove;*/
 
     @Column(name = "game_status")
     @Enumerated(EnumType.STRING)
