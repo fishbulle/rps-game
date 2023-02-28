@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 public class PlayerController {
@@ -18,10 +19,10 @@ public class PlayerController {
                 .getPlayerId();
     }
 
+    @CrossOrigin
     @PostMapping("/user/name")
     public void setPlayerName(@RequestBody UpdatePlayer updatePlayer,
                               @RequestHeader(value = "token") UUID playerId) throws NotFoundException {
         playerService.setPlayerName(updatePlayer, playerId);
     }
-
 }
