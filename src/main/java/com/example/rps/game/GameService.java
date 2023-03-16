@@ -25,6 +25,8 @@ public class GameService {
                 UUID.randomUUID(),
                 playerRepository.findById(playerId).get(),
                 null,
+                null,
+                null,
                 OPEN,
                 null
         );
@@ -38,13 +40,11 @@ public class GameService {
     public Optional<GameEntity> joinGame(UUID playerId, UUID gameId) throws NotFoundException {
         GameEntity gameEntity;
 
-        // lägga till if (spelet is ACTIVE) sout "Game is full" ??
-
-        if (gameRepository.existsById(gameId) ) {
+        if (gameRepository.existsById(gameId)) {
             gameEntity = gameRepository.findById(gameId).get();
 
             gameEntity.setPlayerTwo(playerRepository.getReferenceById(playerId));
-            gameEntity.setGameStatus(ACTIVE);
+            gameEntity.setStatus(ACTIVE);
 
             gameRepository.save(gameEntity);
         } else {
@@ -79,24 +79,29 @@ public class GameService {
 
         if (gameRepository.existsById(gameId)) {
             gameEntity = gameRepository.findById(gameId).get();
-            if (gameEntity.playerOne.getPlayerId().equals(playerId)) {
-                if (gameEntity.playerOne.getMove().beats(gameEntity.playerTwo.getMove())) {
-                    gameEntity.setGameResult(WIN);
-                } else if (gameEntity.playerTwo.getMove().beats(gameEntity.playerOne.getMove())) {
-                    gameEntity.setGameResult(LOSE);
-                } else {
-                    gameEntity.setGameResult(DRAW);
+
+            if (gameEntity.getPlayerOneMove() != null && gameEntity.getPlayerTwoMove() != null) {
+                if (gameEntity.playerOne.getPlayerId().equals(playerId)) {
+                    if (gameEntity.getPlayerOneMove().beats(gameEntity.getPlayerTwoMove())) {
+                        gameEntity.setResult(WIN);
+                    } else if (gameEntity.getPlayerTwoMove().beats(gameEntity.getPlayerOneMove())) {
+                        gameEntity.setResult(LOSE);
+                    } else {
+                        gameEntity.setResult(DRAW);
+                    }
+                }
+
+                if (gameEntity.playerTwo.getPlayerId().equals(playerId)) {
+                    if (gameEntity.getPlayerTwoMove().beats(gameEntity.getPlayerOneMove())) {
+                        gameEntity.setResult(WIN);
+                    } else if (gameEntity.getPlayerOneMove().beats(gameEntity.getPlayerTwoMove())) {
+                        gameEntity.setResult(LOSE);
+                    } else {
+                        gameEntity.setResult(DRAW);
+                    }
                 }
             }
-            if (gameEntity.playerTwo.getPlayerId().equals(playerId)) {
-                if (gameEntity.playerTwo.getMove().beats(gameEntity.playerOne.getMove())) {
-                    gameEntity.setGameResult(WIN);
-                } else if (gameEntity.playerOne.getMove().beats(gameEntity.playerTwo.getMove())) {
-                    gameEntity.setGameResult(LOSE);
-                } else {
-                    gameEntity.setGameResult(DRAW);
-                }
-            }
+
         } else {
             throw new NotFoundException("Game not found.");
         }
@@ -115,29 +120,37 @@ public class GameService {
             gameEntity = gameRepository.findById(gameStatus.gameId()).get();
             if (gameEntity.playerOne.getPlayerId().equals(playerId)) {
                 switch (sign) {
-                    case "rock" -> gameEntity.playerOne.setMove(Move.ROCK);
-                    case "paper" -> gameEntity.playerOne.setMove(Move.PAPER);
-                    case "scissors" -> gameEntity.playerOne.setMove(Move.SCISSORS);
+                    case "rock" -> gameEntity.setPlayerOneMove(Move.ROCK);
+                    case "paper" -> gameEntity.setPlayerOneMove(Move.PAPER);
+                    case "scissors" -> gameEntity.setPlayerOneMove(Move.SCISSORS);
                 }
             }
             if (gameEntity.playerTwo.getPlayerId().equals(playerId)) {
                 switch (sign) {
-                    case "rock" -> gameEntity.playerTwo.setMove(Move.ROCK);
-                    case "paper" -> gameEntity.playerTwo.setMove(Move.PAPER);
-                    case "scissors" -> gameEntity.playerTwo.setMove(Move.SCISSORS);
+                    case "rock" -> gameEntity.setPlayerTwoMove(Move.ROCK);
+                    case "paper" -> gameEntity.setPlayerTwoMove(Move.PAPER);
+                    case "scissors" -> gameEntity.setPlayerTwoMove(Move.SCISSORS);
                 }
             }
         } else {
             throw new NotFoundException("Game not found.");
         }
 
-        if (gameEntity.playerOne.getMove() != null
-                && gameEntity.playerTwo.getMove() != null) {
-            Result result = gameEngine.evaluateMove(gameEntity.playerOne.getMove(), gameEntity.playerTwo.getMove());
-            gameEntity.setGameResult(result);
-            gameEntity.setGameStatus(FINISHED);
+        if (gameEntity.getPlayerOneMove() != null
+                && gameEntity.getPlayerTwoMove() != null) {
+            Result result = gameEngine.evaluateMove(gameEntity.getPlayerOneMove(), gameEntity.getPlayerTwoMove());
+            gameEntity.setResult(result);
 
-            System.out.println(gameEntity.playerOne.getName() + " " + result + "!");
+/*            if (gameEntity.getPlayerOneMove().beats(gameEntity.getPlayerTwoMove())) {
+                gameEntity.playerOneScore++;
+            }
+
+            if (gameEntity.getPlayerTwoMove().beats(gameEntity.getPlayerOneMove())) {
+                gameEntity.playerTwoScore++;
+            }*/
+
+
+            gameEntity.setStatus(FINISHED);
         }
 
         gameRepository.save(gameEntity);

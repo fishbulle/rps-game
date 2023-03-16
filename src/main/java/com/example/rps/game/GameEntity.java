@@ -21,29 +21,35 @@ public class GameEntity {
 
     @Id
     @Column(name = "game_id")
-    private UUID gameId;
+    UUID gameId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "player1_id")
     PlayerEntity playerOne;
 
-/*    @Column(name = "player_one_move")
-    @Enumerated(EnumType.STRING)  // enumerated gör så att det står med bokstäver istället för siffror
-    Move playerOneMove;              // tex istället för 1 står det ROCK*/
+    @Column(name = "player_one_move")
+    @Enumerated(EnumType.STRING)
+    Move playerOneMove;
 
-    @OneToOne
+/*    @Column(name = "player_one_score")
+    int playerOneScore;*/
+
+    @ManyToOne
     @JoinColumn(name = "player2_id")
     PlayerEntity playerTwo;
 
-/*    @Column(name = "player_two_move")
+    @Column(name = "player_two_move")
     @Enumerated(EnumType.STRING)
-    Move playerTwoMove;*/
+    Move playerTwoMove;
+
+/*    @Column(name = "player_two_score")
+    int playerTwoScore;*/
 
     @Column(name = "game_status")
     @Enumerated(EnumType.STRING)
-    Status gameStatus;
+    Status status;
 
     @Column(name = "game_result")
     @Enumerated(EnumType.STRING)
-    Result gameResult;
+    Result result;
 }

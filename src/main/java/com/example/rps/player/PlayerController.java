@@ -13,6 +13,7 @@ public class PlayerController {
 
     private final PlayerService playerService;
 
+    @CrossOrigin
     @GetMapping("/auth/token")
     public UUID getToken() {
         return playerService.getToken()

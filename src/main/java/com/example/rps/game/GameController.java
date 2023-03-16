@@ -24,7 +24,7 @@ public class GameController {
     }
 
     @CrossOrigin
-    @PostMapping("/join/{gameId}")
+    @PostMapping("/games/join/{gameId}")
     public GameStatus joinGame(@RequestHeader(value = "token") UUID playerId,
                                @PathVariable("gameId") UUID gameId) throws NotFoundException {
 
@@ -38,13 +38,13 @@ public class GameController {
     public List<GameEntity> getOpenGames() {
         return gameService.getOpenGames()
                 .stream()
-                .filter(games -> games.gameStatus.equals(Status.OPEN))  // filter games on status OPEN
+                .filter(games -> games.status.equals(Status.OPEN))  // filter games on status OPEN
                 .collect(Collectors.toList());                          // collect them to a list
     }
 
     @CrossOrigin
-    @GetMapping("/games/{gameId}")
-    public GameStatus gameInfo(@PathVariable("gameId") UUID gameId) throws NotFoundException {
+    @GetMapping("/games/info")
+    public GameStatus gameInfo(@RequestHeader(value = "gameId") UUID gameId) throws NotFoundException {
         return gameService.gameInfo(gameId)
                 .map(this::gameEntityToDTO)
                 .orElse(null);
@@ -53,8 +53,8 @@ public class GameController {
     // same as above method except it shows different status (win/lose)
     // depending on whether it's player1 or player2 checking
     @CrossOrigin
-    @GetMapping("/games/result/{gameId}")
-    public GameStatus gameResult(@PathVariable("gameId") UUID gameId,
+    @GetMapping("/games/result")
+    public GameStatus gameResult(@RequestHeader(value = "gameId") UUID gameId,
                                  @RequestHeader(value = "token") UUID playerId) throws NotFoundException {
         return gameService.gameResult(gameId, playerId)
                 .map(this::gameEntityToDTO)
@@ -76,9 +76,11 @@ public class GameController {
         return new GameStatus(
                 gameEntity.getGameId(),
                 gameEntity.getPlayerOne(),
+                gameEntity.getPlayerOneMove(),
                 gameEntity.getPlayerTwo(),
-                gameEntity.getGameStatus(),
-                gameEntity.getGameResult()
+                gameEntity.getPlayerTwoMove(),
+                gameEntity.getStatus(),
+                gameEntity.getResult()
         );
     }
 }
