@@ -21,7 +21,7 @@ public class PlayerController {
     }
 
     @CrossOrigin
-    @PostMapping("/user/name")
+    @PutMapping("/user/name")
     public void setPlayerName(@RequestBody UpdatePlayer updatePlayer,
                               @RequestHeader(value = "token") UUID playerId) throws NotFoundException {
         playerService.setPlayerName(updatePlayer, playerId);

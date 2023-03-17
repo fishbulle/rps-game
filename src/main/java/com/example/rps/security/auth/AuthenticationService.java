@@ -31,7 +31,7 @@ public class AuthenticationService {
         var player = PlayerEntity
                 .builder()
                 .playerId(UUID.randomUUID())
-                .name(request.getName())
+                .username(request.getName())
                 .build();
 
         var user = User
