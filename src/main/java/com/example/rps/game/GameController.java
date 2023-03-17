@@ -71,6 +71,14 @@ public class GameController {
                 .orElse(null);
     }
 
+    @CrossOrigin
+    @DeleteMapping("games/delete")
+    public GameStatus deleteGame(@RequestHeader(value = "gameId") UUID gameId) throws NotFoundException {
+        return gameService.deleteGame(gameId)
+                .map(this::gameEntityToDTO)
+                .orElse(null);
+    }
+
     private GameStatus gameEntityToDTO(GameEntity gameEntity) {
 
         return new GameStatus(

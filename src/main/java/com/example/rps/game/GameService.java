@@ -140,20 +140,25 @@ public class GameService {
                 && gameEntity.getPlayerTwoMove() != null) {
             Result result = gameEngine.evaluateMove(gameEntity.getPlayerOneMove(), gameEntity.getPlayerTwoMove());
             gameEntity.setResult(result);
-
-/*            if (gameEntity.getPlayerOneMove().beats(gameEntity.getPlayerTwoMove())) {
-                gameEntity.playerOneScore++;
-            }
-
-            if (gameEntity.getPlayerTwoMove().beats(gameEntity.getPlayerOneMove())) {
-                gameEntity.playerTwoScore++;
-            }*/
-
-
             gameEntity.setStatus(FINISHED);
         }
 
         gameRepository.save(gameEntity);
+
+        return Optional.of(gameEntity);
+    }
+
+    public Optional<GameEntity> deleteGame(UUID gameId) throws NotFoundException {
+        GameEntity gameEntity;
+
+        if (gameRepository.existsById(gameId)) {
+            gameEntity = gameRepository.findById(gameId).get();
+            if (gameEntity.getStatus() == OPEN || gameEntity.getStatus() == ACTIVE) {
+                gameRepository.delete(gameEntity);
+            }
+        } else {
+            throw new NotFoundException("Game not found.");
+        }
 
         return Optional.of(gameEntity);
     }
