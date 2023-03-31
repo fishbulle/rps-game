@@ -1,4 +1,4 @@
-package com.example.rps.security.user;
+package com.example.rps.player;
 
 public enum Role {
 

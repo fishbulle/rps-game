@@ -4,9 +4,7 @@ import com.example.rps.NotFoundException;
 import com.example.rps.player.PlayerEntity;
 import com.example.rps.player.PlayerRepository;
 import com.example.rps.security.config.JwtService;
-import com.example.rps.security.user.Role;
-import com.example.rps.security.user.User;
-import com.example.rps.security.user.UserRepository;
+import com.example.rps.player.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +17,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final PlayerRepository playerRepository;
     private final JwtService jwtService;
@@ -30,20 +27,14 @@ public class AuthenticationService {
                 .builder()
                 .playerId(UUID.randomUUID())
                 .name(request.getName())
-                .build();
-
-        var user = User
-                .builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
-                .playerEntity(player)
                 .build();
 
         playerRepository.save(player);
-        userRepository.save(user);
 
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(player);
 
         return AuthenticationResponse
                 .builder()
@@ -57,14 +48,16 @@ public class AuthenticationService {
                         request.getUsername(),
                         request.getPassword()));
 
-        var user = userRepository.findByUsername(request.getUsername())
+        var player = playerRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new NotFoundException("Not found."));
 
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(player);
+        var playerId = player.getPlayerId();
 
         return AuthenticationResponse
                 .builder()
                 .token(jwtToken)
+                .playerId(playerId)
                 .build();
     }
 }
