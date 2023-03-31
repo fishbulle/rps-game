@@ -31,9 +31,6 @@ public class GameEntity {
     @Enumerated(EnumType.STRING)
     Move playerOneMove;
 
-/*    @Column(name = "player_one_score")
-    int playerOneScore;*/
-
     @ManyToOne
     @JoinColumn(name = "player2_id")
     PlayerEntity playerTwo;
@@ -41,9 +38,6 @@ public class GameEntity {
     @Column(name = "player_two_move")
     @Enumerated(EnumType.STRING)
     Move playerTwoMove;
-
-/*    @Column(name = "player_two_score")
-    int playerTwoScore;*/
 
     @Column(name = "game_status")
     @Enumerated(EnumType.STRING)

@@ -8,24 +8,23 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 public class GameController {
 
     private final GameService gameService;
 
-    @CrossOrigin
     @PostMapping("/start")
-    public GameStatus startGame(@RequestHeader(value = "token") UUID playerId) {
+    public GameStatus startGame(@RequestHeader(value = "playerId") UUID playerId) {
 
         return gameService.startGame(playerId)
                 .map(this::gameEntityToDTO)
                 .orElse(null);
     }
 
-    @CrossOrigin
     @PostMapping("/games/join/{gameId}")
-    public GameStatus joinGame(@RequestHeader(value = "token") UUID playerId,
+    public GameStatus joinGame(@RequestHeader(value = "playerId") UUID playerId,
                                @PathVariable("gameId") UUID gameId) throws NotFoundException {
 
         return gameService.joinGame(playerId, gameId)
@@ -33,7 +32,6 @@ public class GameController {
                 .orElse(null);
     }
 
-    @CrossOrigin
     @GetMapping("/games")
     public List<GameEntity> getOpenGames() {
         return gameService.getOpenGames()
@@ -42,7 +40,6 @@ public class GameController {
                 .collect(Collectors.toList());                          // collect them to a list
     }
 
-    @CrossOrigin
     @GetMapping("/games/info")
     public GameStatus gameInfo(@RequestHeader(value = "gameId") UUID gameId) throws NotFoundException {
         return gameService.gameInfo(gameId)
@@ -52,26 +49,23 @@ public class GameController {
 
     // same as above method except it shows different status (win/lose)
     // depending on whether it's player1 or player2 checking
-    @CrossOrigin
     @GetMapping("/games/result")
     public GameStatus gameResult(@RequestHeader(value = "gameId") UUID gameId,
-                                 @RequestHeader(value = "token") UUID playerId) throws NotFoundException {
+                                 @RequestHeader(value = "playerId") UUID playerId) throws NotFoundException {
         return gameService.gameResult(gameId, playerId)
                 .map(this::gameEntityToDTO)
                 .orElse(null);
     }
 
-    @CrossOrigin
     @PostMapping("/games/move/{sign}")
     public GameStatus makeMove(@PathVariable("sign") String sign,
-                               @RequestHeader(value = "token") UUID playerId,
+                               @RequestHeader(value = "playerId") UUID playerId,
                                @RequestBody GameStatus gameStatus) throws NotFoundException {
         return gameService.makeMove(sign, playerId, gameStatus)
                 .map(this::gameEntityToDTO)
                 .orElse(null);
     }
 
-    @CrossOrigin
     @DeleteMapping("games/delete")
     public GameStatus deleteGame(@RequestHeader(value = "gameId") UUID gameId) throws NotFoundException {
         return gameService.deleteGame(gameId)

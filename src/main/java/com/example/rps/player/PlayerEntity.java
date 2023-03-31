@@ -2,7 +2,6 @@ package com.example.rps.player;
 
 import com.example.rps.game.GameEntity;
 
-import com.example.rps.game.Move;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -27,8 +26,8 @@ public class PlayerEntity {
     @Column(name = "player_id")
     private UUID playerId;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "name")
+    private String name;
 
     @OneToMany(mappedBy = "playerOne")
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -51,4 +50,5 @@ public class PlayerEntity {
     public void setPlayerTwoGame(GameEntity playerTwoGame) {
         this.playerOneGame.add(playerTwoGame);
     }
+
 }

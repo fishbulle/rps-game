@@ -26,12 +26,10 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        // builds and maps a player entity and a user entity
-
         var player = PlayerEntity
                 .builder()
                 .playerId(UUID.randomUUID())
-                .username(request.getName())
+                .name(request.getName())
                 .build();
 
         var user = User

@@ -13,17 +13,15 @@ public class PlayerController {
 
     private final PlayerService playerService;
 
-    @CrossOrigin
     @GetMapping("/auth/token")
     public UUID getToken() {
         return playerService.getToken()
                 .getPlayerId();
     }
 
-    @CrossOrigin
-    @PutMapping("/user/name")
+    @PostMapping("/user/name")
     public void setPlayerName(@RequestBody UpdatePlayer updatePlayer,
-                              @RequestHeader(value = "token") UUID playerId) throws NotFoundException {
+                              @RequestHeader(value = "playerId") UUID playerId) throws NotFoundException {
         playerService.setPlayerName(updatePlayer, playerId);
     }
 }
