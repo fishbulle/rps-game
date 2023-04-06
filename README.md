@@ -1,2 +1,2 @@
-# Rock Paper Scissors API with Spring Security JWT
+# Rock Paper Scissors REST API with Spring Security JWT
 
