@@ -11,11 +11,12 @@ import java.util.stream.Collectors;
 @CrossOrigin
 @RestController
 @AllArgsConstructor
+@RequestMapping("/games")
 public class GameController {
 
     private final GameService gameService;
 
-    @PostMapping("/start")
+    @PostMapping("/create")
     public GameStatus startGame(@RequestHeader(value = "playerId") UUID playerId) {
 
         return gameService.startGame(playerId)
@@ -23,7 +24,23 @@ public class GameController {
                 .orElse(null);
     }
 
-    @PostMapping("/games/join/{gameId}")
+    @GetMapping
+    public List<GameEntity> getOpenGames() {
+        return gameService.getOpenGames()
+                .stream()
+                .filter(games -> games.status.equals(Status.OPEN))  // filter games on status OPEN
+                .collect(Collectors.toList());                          // collect them to a list
+    }
+
+    @GetMapping("/gameInfo")
+    public GameStatus gameResult(@RequestHeader(value = "gameId") UUID gameId,
+                                 @RequestHeader(value = "playerId") UUID playerId) throws NotFoundException {
+        return gameService.gameResult(gameId, playerId)
+                .map(this::gameEntityToDTO)
+                .orElse(null);
+    }
+
+    @PutMapping("/add/{gameId}")
     public GameStatus joinGame(@RequestHeader(value = "playerId") UUID playerId,
                                @PathVariable("gameId") UUID gameId) throws NotFoundException {
 
@@ -32,32 +49,7 @@ public class GameController {
                 .orElse(null);
     }
 
-    @GetMapping("/games")
-    public List<GameEntity> getOpenGames() {
-        return gameService.getOpenGames()
-                .stream()
-                .filter(games -> games.status.equals(Status.OPEN))  // filter games on status OPEN
-                .collect(Collectors.toList());                          // collect them to a list
-    }
-
-    @GetMapping("/games/info")
-    public GameStatus gameInfo(@RequestHeader(value = "gameId") UUID gameId) throws NotFoundException {
-        return gameService.gameInfo(gameId)
-                .map(this::gameEntityToDTO)
-                .orElse(null);
-    }
-
-    // same as above method except it shows different status (win/lose)
-    // depending on whether it's player1 or player2 checking
-    @GetMapping("/games/result")
-    public GameStatus gameResult(@RequestHeader(value = "gameId") UUID gameId,
-                                 @RequestHeader(value = "playerId") UUID playerId) throws NotFoundException {
-        return gameService.gameResult(gameId, playerId)
-                .map(this::gameEntityToDTO)
-                .orElse(null);
-    }
-
-    @PostMapping("/games/move/{sign}")
+    @PostMapping("/update/{sign}")
     public GameStatus makeMove(@PathVariable("sign") String sign,
                                @RequestHeader(value = "playerId") UUID playerId,
                                @RequestBody GameStatus gameStatus) throws NotFoundException {
@@ -66,7 +58,7 @@ public class GameController {
                 .orElse(null);
     }
 
-    @DeleteMapping("games/delete")
+    @DeleteMapping("/delete")
     public GameStatus deleteGame(@RequestHeader(value = "gameId") UUID gameId) throws NotFoundException {
         return gameService.deleteGame(gameId)
                 .map(this::gameEntityToDTO)
