@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/players")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
